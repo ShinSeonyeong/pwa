@@ -5,37 +5,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        @font-face {
+            font-family: 'GowunDodum-Regular';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'GowunDodum-Regular', Courier, monospace;
+        }
+
+        #container {
+            width: 560px;
+            /* background-color: lightskyblue; */
+            padding: 30px;
+            margin: 0 auto;
+        }
+
+        #container>#nav {background-color: rgb(238, 238, 238);}
+        #container>#nav>div {padding: 20px;}
+        #container>#nav h1 {display: inline;}
+        #container table,th,td{
+            border: 1px solid black;
+            border-collapse: collapse;
+        } 
+        #container th, td{
+            padding: 10px;
+        }
+        /* #container>div {background-color: lightyellow;} */
+        #container>#footer {
+            text-align: center;
+            padding: 20px;
+            background-color: lightgrey;
+        }
+    </style>
 </head>
 
 <body>
-    <div style="float: left;">
-        <figure>
-            <img 
-                src="seoul.png" alt="" 
-                style="width: 250px; padding: 10px; margin-right: 30px;"
-            />
-            <!-- <h1 style="background-color: lightpink;">서울특별시</h1> -->
-             <figcaption>이미지에 대한 설명</figcaption>
-        </figure>
+    <div id="container">
+        <div id="nav" style="overflow: hidden;">
+            <div style="float: left;">
+                <a href=""><h1>홈</h1></a>
+            </div>
+            <div style="float: right;">
+                <a href="login.html"><h1>메뉴1</h1></a>
+                <a href=""><h1>메뉴2</h1></a>
+            </div>
+        </div>
+            <div>
+                <div style="overflow: hidden;">
+                    <figure style="float: left;">
+                        <img src="main1.jpg" alt="" style="width: 250px">
+                        <figcaption>먹자먹자</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="main2.png" alt="" style="width: 250px;">
+                        <figcaption>춤추자</figcaption>
+                    </figure>
+                </div>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis cumque quae, rerum saepe placeat ullam iure magni exercitationem nesciunt nam ex non sapiente, molestias sunt qui mollitia explicabo fuga voluptatibus!</p>
+            </div>
+        <div style="padding: 20px;">
+            <h1>Education</h1>
+            <table style="width: 100%;">
+                <caption>학력사항</caption>
+                <thead>
+                    <tr>
+                        <th>출신학교</th>
+                        <th>전공</th>
+                        <th>기간</th>
+                        <th>구분</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ㅁㅁㅁ대학교</td>
+                        <td>정보통신공학</td>
+                        <td>2017.02~2022.02</td>
+                        <td>졸업</td>
+                    </tr>
+                    <tr>
+                        <td>aaa고등학교</td>
+                        <td>-</td>
+                        <td>2014.03~2017.02</td>
+                        <td>졸업</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="footer"><h1>CopyRight 신선영</h1></div>
     </div>
-    <div>
-    <!-- <div style="padding-left: 300px;"> -->
-        <h1 >서울특별시</h1>
-    <p>
-        <strong>서울의 시장 아버지: 역사와 활력의 인간도시</strong><br />
-        <span style="margin-right: 5px;">휘장은</span> 한글 '서울'을 서울의 산, 해, 한강으로 나타내면서 전체적으로는 신명나는 사람의 모습을 형상화한 것으로 인간 중심도시를 지향하는 서울을 상징합니다. <br />
-    </p>
-    </div>
-    <div style="clear: left;">
-        <p>
-            자연 - 인간 - 도시의 맥락 속에서<br />
-            녹색 산은 환경사랑, 청색 한강은 역사와 활력<br />
-            가운데 해는 미래의 비전과 희망을 함축<br />
-            세가지 요소를 붓터치로 자연스럽게 연결하여<br />
-            서울의 이미지와 사람의 활력을 친근하게 느낄 수 있도록 하였습니다.
-        </p>
-    </div>
-    <a href="im01.html"><h1>페이지 이동</h1></a>
+    <div>피그마에 디자인 한 것에 대해 실습진행</div>
 </body>
 
 </html>
