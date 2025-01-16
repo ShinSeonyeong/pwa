@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../CSS/reset.css">
+    <link rel="stylesheet" href="../CSS/moblie.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/582d1bfdc8.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="container">
+        <!-- <input type="checkbox" name="" id="menu" /> -->
+        <input type="checkbox" name="" id="menu" style="display: none;"/>
+        <div id="header">
+            <div id="left-menu">
+                <h3 style="padding-left: 10px; padding-top: 5px;"><i class="fa-solid fa-circle-user fa-2x"></i></h3>
+            </div>
+            <div id="center-menu">
+                <a href="index.html">
+                    <h1 style="line-height: 60px;">SSY</h1>
+                </a>
+            </div>
+            <div id="right-menu">
+                <label for="menu">
+                    <h3 style="padding-right: 10px; padding-top: 5px; cursor: pointer;"><i
+                            class="fa-solid fa-bars fa-2x"></i></h3>
+                </label>
+            </div>
+        </div>
+        <hr>
+        <div id="sub-header">
+            <ul>
+                <li><a href="html.html" style="background-color: rgb(100, 180, 250);">HTML</a></li>
+                <li><a href="css.html" style="background-color: rgb(200, 180, 250);">CSS</a></li>
+                <li><a href="javascript.html" style="background-color: rgb(100, 180, 250);">JAVASCRIPT</a></li>
+                <li><a href="github.html" style="background-color: rgb(200, 180, 250);">GITHUB</a></li>
+            </ul>
+        </div>
+        <div id="content">
+            <!-- Slider main container -->
+            <div class="swiper" style="height: 300px;">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide">
+                        <img src="../images/gecon.jpg" alt="" style="width: 460px; height: 300px;">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="../images/pepe.jfif" alt="" style="width: 460px; height: 300px;">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="../images/em02.png" alt="" style="width: 460px; height: 300px;">
+                    </div>
+                </div>
+                <!-- If we need pagination -->
+                <!-- <div class="swiper-pagination"></div> -->
+
+                <!-- If we need navigation buttons -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+
+                <!-- If we need scrollbar -->
+                <!-- <div class="swiper-scrollbar"></div> -->
+            </div>
+            <div style="margin: 2rem 0;">
+                <h1>안녕하세요.</h1>
+                <p style="margin-top: 1rem; letter-spacing: 0.2rem; line-height: 1.5rem;">
+                    HTML CSS 학습 중 입니다.
+                    자기소개서(自己紹介書)는 타인에게 자기를 소개하는 글로 주로 입시, 취업을 위해 이력서와 함께 작성하는 필수 문서이다.[1] 흔히 자소서로 줄여서 부르며, 기본적으로 내가 살아온
+                    생애를 시작으로 특성과 장점을 작게는 타인 크게는 대학교,대학원, 회사에 구체적으로 보여주기에, 다양한 영역에서 활용하고 있다.
+                </p>
+            </div>
+        </div>
+        <div id="footer">
+            <h1>COPY RIGHT by 신선영</h1>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    const swiper = new Swiper('.swiper', {
+        // Optional parameters
+        direction: 'vertical',
+        loop: true,
+
+        // If we need pagination
+        pagination: {
+            el: '.swiper-pagination',
+        },
+
+        // Navigation arrows
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+
+        // And if we need scrollbar
+        scrollbar: {
+            el: '.swiper-scrollbar',
+        },
+    });
+</script>
