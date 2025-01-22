@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-areas: 
+            "item1 item1 item2"
+            "item3 item3 item3"
+            "item4 .     item5"
+            ;
+        }
+    
+        .items {
+            padding: 10px;
+            background-color: rgb(100, 200, 150);
+        }
+    
+        .items:nth-child(2n) {
+            background-color: rgb(200, 150, 150);
+        }
+    
+        .item1 {grid-area: item1;}
+    
+        .item2 {grid-area: item2;}
+    
+        .item3 {grid-area: item3;}
+    
+        .item4 {grid-area: item4;}
+    
+        .item5 {grid-area: item5;}
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div class="items item1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut eum praesentium, magni
+            enim cupiditate vero illo modi accusamus nam illum quidem. Voluptas nobis neque sunt in, delectus numquam
+            culpa distinctio.</div>
+        <div class="items item2">Et voluptate nisi cillum in qui nostrud in deserunt. Aliquip do incididunt ex elit sint
+            id nulla aliquip excepteur. Aliqua proident duis sint exercitation laboris in ullamco. Do irure occaecat
+            elit nisi culpa ea labore pariatur. Officia nulla enim qui labore aute non do eu quis aute occaecat in non
+            do.</div>
+        <div class="items item3">Consequat quis exercitation ullamco do dolor excepteur do. Aliquip et aliqua quis ex
+            velit laboris do consectetur. Non magna anim ut commodo anim duis est aliqua ut culpa ut. Culpa sunt
+            pariatur mollit id aute ullamco ad ut non. Consectetur ea quis quis deserunt reprehenderit sint tempor
+            fugiat reprehenderit. In laboris labore quis veniam reprehenderit cillum sunt fugiat Lorem eiusmod fugiat
+            ipsum culpa labore. Excepteur aliqua nulla deserunt qui est non id culpa est aliqua amet consequat dolor.
+        </div>
+        <div class="items item4">Excepteur exercitation exercitation do quis fugiat occaecat. Voluptate labore
+            consectetur dolore pariatur commodo laborum in. Tempor esse cupidatat dolor cupidatat consequat excepteur
+            veniam aliqua exercitation excepteur. Exercitation ut eu esse cupidatat commodo. Laboris voluptate nostrud
+            Lorem irure nostrud Lorem nisi do sint. Quis qui do ut Lorem qui cupidatat duis voluptate dolor velit
+            consectetur incididunt elit non.</div>
+        <div class="items item5">Nulla proident irure laboris anim nostrud adipisicing pariatur est quis. Adipisicing
+            nostrud nisi esse in tempor. In ut in fugiat nostrud. Ullamco deserunt elit ullamco elit adipisicing eu
+            aliqua excepteur.</div>
+    </div>
+    
+</body>
+</html>
