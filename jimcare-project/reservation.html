@@ -6,16 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>짐케어</title>
     <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!-- fontasome 가져오기 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         @font-face {
-            font-family: 'SBAggroB';
-            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
-            font-weight: normal;
+            font-family: 'Pretendard-Regular';
+            src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+            font-weight: 400;
             font-style: normal;
         }
 
         * {
-            font-family: 'SBAggroB';
+            font-family: 'Pretendard-Regular';
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fade-in 0.8s ease-in-out forwards;
         }
     </style>
 
@@ -50,12 +69,12 @@
         </div>
     </div>
 </div>
-<div class="bg-amber-300">
-    <div class="text-center py-20">
+<div class="bg-amber-300 pt-10">
+    <div class="text-center pt-10 pb-5">
         <h1 class="text-7xl animate-bounce">예약하기</h1>
         <h5 class="text-3xl">reservation</h5>
     </div>
-    <div class="w-[1200px] bg-gray-50 mx-auto p-5 shadow-md rounded-md">
+    <div class="w-[1200px] bg-gray-50 mx-auto p-5 shadow-md rounded-md opacity-0 translate-y-10 animate-fade-in">
         <div class="flex my-3 h-15">
             <div class="bg-amber-300 text-white px-16 py-3 rounded w-[300px] h-full flex items-center justify-center">
                 <label>이름</label>
@@ -76,28 +95,112 @@
                        type="text" name="name" id="phone" placeholder="구분자(-)를 제외한 숫자만 입력하세요">
             </div>
         </div>
-        <div class="flex my-3 h-20">
+        <div class="flex my-3 h-20" id="div-service">
             <div class="bg-amber-300 text-white px-16 py-3 rounded w-[300px] h-full flex items-center justify-center">
-                <label>이용날짜 및 선비스 선택</label>
+                <label>이용날짜 및 서비스 선택</label>
             </div>
             <div class="p-1 border border-gray-300 rounded-lg shadow-sm ml-1" style="flex:1">
-                <div class="flex h-full items-center gap-2">
-                    <input class="border p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                           type="date" name="name" id="use-date">
-                    <i class="fa-regular fa-calendar-days fa-2x"></i>
-                    <select name="type" id="type"
-                            class="w-[250px] p-2 border border-gray-300 rounded-lg shadow-sm
-                            focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option value="">이용서비스선택</option>
-                        <option value="">짐보관(1일기준)</option>
-                        <option value="">짐이동</option>
-                    </select>
+                <div class="flex flex-col h-full gap-2">
+                    <div>
+                        <input class="border p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                               type="date" name="name" id="use-date">
+                        <i class="fa-regular fa-calendar-days fa-2x"></i>
+                        <select name="type" id="type"
+                                class="w-[250px] p-2 border border-gray-300 rounded-lg shadow-sm
+                                focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="none">이용서비스선택</option>
+                            <option value="jim-keep">짐보관(1일기준)</option>
+                            <option value="jim-move">짐이동</option>
+                        </select>
+                    </div>
+                    <div id="etc1" class=" p-2">  <!--hidden-->
+                        <div class="flex items-center gap-5 mb-5">
+                            <h3 class="text-gray-700">짐 맡길 시간</h3>
+                            <select class="w-[100px] p-2 border border-gray-300 rounded-lg shadow-sm
+                                focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">시</option>
+                                <option value="00">00</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                            </select>
+                            <select class="w-[100px] p-2 border border-gray-300 rounded-lg shadow-sm
+                                focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">분</option>
+                                <option value="00">00</option>
+                                <option value="20">20</option>
+                                <option value="40">40</option>
+                            </select>
+
+                            <h3 class="text-gray-700">짐 찾을 시간</h3>
+                            <select class="w-[100px] p-2 border border-gray-300 rounded-lg shadow-sm
+                                focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">시</option>
+                                <option value="00">00</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                            </select>
+                            <select class="w-[100px] p-2 border border-gray-300 rounded-lg shadow-sm
+                                focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">분</option>
+                                <option value="00">00</option>
+                                <option value="20">20</option>
+                                <option value="40">40</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center gap-5 mb-5">
+                            <label for="bag1" class="text-gray-700 mr-48">쇼핑백/백팩 개당<span class="text-orange-500">3,000원</span></label>
+                            <input class="w-[100px] p-2 border border-gray-300 rounded-lg shadow-sm
+                                focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" name="" id="bag1" value="0"/>
+                        </div>
+                        <div class="flex items-center gap-5 mb-5">
+                            <label for="bag2" class="text-gray-700 mr-64">캐리어<span class="text-orange-500">3,000원</span></label>
+                            <input class="w-[100px] p-2 border border-gray-300 rounded-lg shadow-sm
+                                focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" name="" id="bag2" value="0"/>
+                        </div>
+                        <div class="flex items-center gap-5 mb-5">
+                            <label for="bag3" class="text-gray-700 mr-40">기타물품 종류 및 수량<span class="text-orange-500">3,000원</span></label>
+                            <input class="w-[100px] p-2 border border-gray-300 rounded-lg shadow-sm
+                                focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" name="" id="bag3" value="0"/>
+                        </div>
+                        <div class="flex items-center gap-5 mb-5">
+                            <label for="bag1" class="text-orange-300 mr-48">※ 보관 이용 요금은 1일 기준입니다.</label>
+                        </div>
+                    </div>
+
+                    <div id="etc2" class="hidden">
+                        <h1>etc2</h1>
+                    </div>
+                    <script>
+                        var $select = document.querySelector('#type');
+                        var $etc1 = document.querySelector('#etc1');
+                        var $etc2 = document.querySelector('#etc2');
+                        var $divService = document.querySelector('#div-service');
+                        $select.addEventListener('change', function (e) {
+                            if (e.target.value === 'jim-keep') {
+                                $etc1.classList.remove('hidden');
+                                $etc2.classList.add('hidden');
+                                $divService.classList.remove('h-20');
+                                $divService.classList.add('h-100');
+                            } else if (e.target.value === 'jim-move') {
+                                $etc1.classList.add('hidden');
+                                $etc2.classList.remove('hidden');
+                                $divService.classList.remove('h-20');
+                                $divService.classList.add('h-100');
+                            } else {
+                                $etc1.classList.add('hidden');
+                                $etc2.classList.add('hidden');
+                                $divService.classList.remove('h-100');
+                                $divService.classList.add('h-20');
+                            }
+                        });
+                    </script>
                 </div>
             </div>
         </div>
         <div class="flex my-3 h-32">
-            <div class="bg-amber-300 text-white px-16 py-3 rounded w-[300px] h-full flex items-center justify-center">
-                <label>문의사항/ 짐에 관한 당부사항</label>
+            <div class="bg-amber-300 text-white px-16 py-3 rounded w-[300px] h-full flex flex-col items-center justify-center">
+                <label>문의사항</label>
+                <label>짐에관한 당부사항</label>
             </div>
             <div class="p-1 border border-gray-300 rounded-lg shadow-sm ml-1" style="flex:1">
                 <textarea class="p-1 border border-gray-300 rounded-lg shadow-sm w-full h-full resize-none
@@ -107,10 +210,10 @@
         </div>
         <div class="flex my-3 h-30">
             <div class="bg-amber-300 text-white px-16 py-3 rounded w-[300px] h-full flex items-center justify-center">
-                <label>개인정보/<br/>취급방침</label>
+                <label>개인정보<br/>취급방침</label>
             </div>
             <div class="p-1 border border-gray-300 rounded-lg shadow-sm ml-1 h-30 overflow-auto"
-                 style="flex:1;font-family: 'Pretendard-Regular';">
+                 style="flex:1; font-family: 'Pretendard-Regular';">
                 개인정보취급방침<br/>
                 “짐케어”(이하 “회사”라 함)은 통신비밀보호법, 전기통신사업법, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 등 정보통신서비스제공자가 준수하여야 할 관련 법령상의 개인정보보호 규정을
                 준수하며, 관련 법령에 의거한 개인정보취급방침을 정하여 이용자 권익 보호에 최선을 다하고 있습니다.<br/>
@@ -159,7 +262,8 @@
 
         <div class="text-center">
             <div class="mt-5 mb-10">
-                <input type="checkbox" name="agree" id="agree">개인정보제공에 동의합니다.
+                <input type="checkbox" name="agree" id="agree"> <label for="agree" class="cursor-pointer">개인정보제공에
+                동의합니다.</label>
             </div>
             <div>
                 <button class="bg-amber-300 px-12 py-7 text-white cursor-pointer rounded">예약하기</button>
@@ -179,6 +283,7 @@
                 |
                 <div>개인정보취급방침</div>
             </div>
+            <!--            top 클릭하면 스크롤 창 가장 위로 올림-->
             <div class="flex items-center h-full cursor-pointer bg-gray-900 px-3"
                  onclick="window.scrollTo({top:0, behavior:'smooth'})">TOP⇧
             </div>
@@ -194,6 +299,7 @@
             </div>
         </div>
     </div>
+    <input type="text" id="test"/>
 </div>
 </body>
 </html>
@@ -202,5 +308,17 @@
         flatpickr("#use-date", {
             dateFormat: "Y-m-d"
         });
+        flatpickr("#test", {
+            dateFormat: "Y-m-d"
+        });
     });
+</script>
+<script>
+    console.log(window);
+    window.onkeydown = function (e) {
+        console.log(e.key);
+        if (e.key === 'ArrowRight') {
+
+        }
+    }
 </script>
