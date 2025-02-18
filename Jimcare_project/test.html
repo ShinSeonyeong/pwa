@@ -40,20 +40,20 @@
                 top: 0; bottom: 0; left: 0; right: 0;
                 background-color: rgba(240, 240 , 240, 0.5);" id="modal" class="hidden">
     <div style="display: flex;
-                    flex-direction: column;
-                    width: 300px;
-                    height: 150px;
-                    background-color: white;
-                    margin: 100px auto;
-                    padding: 20px;
-                    border-radius: 10px;">
+                flex-direction: column;
+                width: 300px;
+                height: 150px;
+                background-color: white;
+                margin: 100px auto;
+                padding: 20px;
+                border-radius: 10px;">
         <span id="update-id">순번0</span>
         <span>코멘트<input type="text" name="" id="update-comment" placeholder="코멘트를 입력하세요."></span>
         <span>작성자<input type="text" name="" id="update-writer" placeholder="작성자를 입력하세요."></span>
         <span id="update-date">작성시간 2025.02.17</span>
         <div>
-            <button>수정</button>
-            <button onclick="updateClose();">닫기</button>
+            <button id="update">수정</button>
+            <button onclick="updateModalClose();">닫기</button>
         </div>
     </div>
 </div>
@@ -66,9 +66,13 @@
     const $modal = document.querySelector('#modal');
     // $model.classList.add('hidden');
 
+    //document: 해당되는 태그들 가져오는 것
+    // supabase db 연결
     const $comment = document.querySelector('#comment');
     const $writer = document.querySelector('#writer');
     const $insert = document.querySelector('#insert');
+    const $update = document.querySelector('#update');
+
     const $select = document.querySelector('#select');
     const $result = document.querySelector('#result');
 
@@ -82,7 +86,8 @@
 
     const supabase = window.supabase.createClient(dbUrl, dbPassword);
 
-    function update(id, comment, writer, date) {
+    // updateModal창 열기 - onclick
+    function updateModalOpen(id, comment, writer, date) {
         console.log(id, comment, writer, date);
         $modal.classList.remove('hidden');
         console.log($modal);
@@ -93,22 +98,26 @@
         $updateDate.innerHTML = `날짜 ${date}`;
     }
 
-    function updateClose() {
+    // updateModal창 닫기 - onclick
+    function updateModalClose() {
         $modal.classList.add('hidden');
     }
 
+    // 삭제하는 함수 (해당행 삭제)
     async function deleteData(num) {
         await supabase.from('test').delete().eq('id', num);
         console.log('삭제되었습니다.');
         selectData();
     }
 
+    // 저장하는 함수 (해당행 삽입)
     async function insertData(comment, writer) {
         const response = await supabase.from('test').insert([{comment, writer}]);
         console.log(response);
         selectData();
     }
 
+    // 조회하는 함수 (전체행 가져오기)
     async function selectData() {
         // select * from order by create_at desc;
         const response = await supabase.from('test').select('*').order('create_at', {ascending: false});
@@ -129,7 +138,7 @@
                                <span>작성시간 ${new Date(response.data[i].create_at).toLocaleDateString()}</span>
                                <div>
                                    <button onclick="deleteData(${response.data[i].id})">삭제</button>
-                                   <button onclick="update(${response.data[i].id},
+                                   <button onclick="updateModalOpen(${response.data[i].id},
                                                            '${response.data[i].comment}',
                                                            '${response.data[i].writer}',
                                                            '${new Date(response.data[i].create_at).toLocaleDateString()}')">수정</button>
@@ -139,6 +148,7 @@
         $result.innerHTML = result;
     }
 
+    // 저장버튼 눌렀을 때 - addEventListner
     $insert.addEventListener('click', function () {
         if ($comment.value.length < 1) {
             alert('코멘트를 입력하세요.');
@@ -156,7 +166,25 @@
         }
         console.log('test');
     });
+
+    // 조회버튼 눌렀을 때 - addEventListner
     $select.addEventListener('click', function () {
         selectData();
+    });
+
+    // 수정버튼 눌렀을 때 - addEventListner
+    $update.addEventListener('click', async function () {
+        // update test set comment = '변경할내용', writer='작성자'
+        const data = {
+            comment: $updateComment.value,
+            writer: $updateWriter.value,
+        };
+        const id = $updateId.innerText.split(' ');
+        console.log(id);
+        console.log(data);
+        await supabase.from('test').update(data).eq('id', id[1]);
+        selectData();
+        updateModalClose();
+        // await supabase.from('test').update({comment: "변경데이터"}).eq('id', );
     });
 </script>
