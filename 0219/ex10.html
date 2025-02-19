@@ -86,7 +86,7 @@
     function left() {
         clearInterval(inteval);
         console.log(i--);
-        if (i < 4) i = 0;
+        if (i < 0) i = 4;
         for (var j = 0; j < $divArr.length; j++) {
             $divArr[i].style.marginLeft = '0px';
         }
