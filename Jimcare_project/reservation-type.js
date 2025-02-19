@@ -4,6 +4,7 @@ var $etc2 = document.querySelector('#etc2');
 var $divService = document.querySelector('#div-service');
 
 const $confirmReserve = document.querySelector('#confirm-reserve');
+const $cancelReserve = document.querySelector('#cancel-reserve');
 
 const $step01 = document.querySelector('#step01');
 const $step02 = document.querySelector('#step02');
@@ -30,3 +31,8 @@ $confirmReserve.addEventListener('click', function (e) {
     $step01.classList.add('hidden');
     $step02.classList.remove('hidden');
 });
+
+$cancelReserve.addEventListener('click', function (e) {
+    $step02.classList.add('hidden');
+    $step01.classList.remove('hidden');
+})
