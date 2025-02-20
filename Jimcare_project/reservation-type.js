@@ -89,7 +89,7 @@ $submitReserve.addEventListener('click', async function (e) {
         {
             name: $nameOutput.value,
             phone: $phoneOutput.value,
-            
+
             use_date_keep: $dateOutput.innerHTML, // 예약 날짜 (YYYY-MM-DD)
 
             //이동인경우 날짜 넣기
