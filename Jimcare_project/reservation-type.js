@@ -3,6 +3,29 @@ var $etc1 = document.querySelector('#etc1');
 var $etc2 = document.querySelector('#etc2');
 var $divService = document.querySelector('#div-service');
 
+const $nameInput = document.querySelector('#name');
+const $phoneInput = document.querySelector('#phone');
+
+const $typeInput = document.querySelector('#type');
+
+const $jimStartHour = document.querySelector('#jim-start-hour');
+const $jimStartMin = document.querySelector('#jim-start-min');
+const $jimEndHour = document.querySelector('#jim-end-hour');
+const $jimEndMin = document.querySelector('#jim-end-min');
+
+const $keepBag1 = document.querySelector('#keep-bag1');
+const $keepBag2 = document.querySelector('#keep-bag2');
+const $keepBag3 = document.querySelector('#keep-bag3');
+
+const $useDateInput = document.querySelector('#use-date');
+const $commentInput = document.querySelector('#comment');
+const $agreeInput = document.querySelector('#agree');
+
+const $nameOutput = document.querySelector('#r-name');
+const $phoneOutput = document.querySelector('#r-phone');
+const $dateOutput = document.querySelector('#r-date');
+const $commentOutput = document.querySelector('#r-comment');
+
 const $confirmReserve = document.querySelector('#confirm-reserve');
 const $cancelReserve = document.querySelector('#cancel-reserve');
 const $submitReserve = document.querySelector('#submit-reserve');
@@ -33,6 +56,24 @@ $select.addEventListener('change', function (e) {
 });
 
 $confirmReserve.addEventListener('click', function (e) {
+    if (!($agreeInput.checked)) {   // false이면 return
+        alert('개인정보 취급 방침에 동의하셔야 합니다.')
+        return;
+    }
+
+    if($nameInput.value === '') {
+        alert('예약자 이름 입력하세요.');
+        $nameInput.focus();
+        return;
+    }
+
+    $nameOutput.innerHTML = $nameInput.value; // 예약자 이름 설정
+    $phoneOutput.innerHTML = $phoneInput.value;
+    $dateOutput.innerHTML = $useDateInput.value;
+    $commentOutput.innerHTML = $commentInput.value;
+
+    alert($agreeInput.checked);
+
     $step01.classList.add('hidden');
     $step02.classList.remove('hidden');
 });
@@ -43,24 +84,37 @@ $cancelReserve.addEventListener('click', function (e) {
 })
 
 $submitReserve.addEventListener('click', async function (e) {
-    await dbConnect.from('reservation').insert([
+    console.log($jimStartHour.value);
+    const res = await dbConnect.from('reservation').insert([
         {
-            id: 1,  // 실제 고객 ID로 변경
-            use_date: '2025-02-07', // 예약 날짜 (YYYY-MM-DD)
-            departure_time: '10:00:00', // 출발 시간 (HH:MM:SS)
-            departure_location: 'Seoul Station', // 출발 장소
-            arrival_time: '12:00:00', // 도착 시간 (HH:MM:SS)
-            arrival_location: 'Busan Station', // 도착 장소
-            shopping_bag_count: 2, // 쇼핑백 개수
-            carrier_small_count: 1, // 작은 캐리어 개수
-            carrier_large_count: 0, // 큰 캐리어 개수
-            other_items: 'Umbrella, Backpack', // 기타 물품
-            inquiries: 'Handle with care', // 문의 사항
-            status: 'pending', // 예약 상태
-            total_price: 50000, // 총 가격
-            payment_status: 'pending', // 결제 상태
+            name: $nameOutput.value,
+            phone: $phoneOutput.value,
+            
+            use_date_keep: $dateOutput.innerHTML, // 예약 날짜 (YYYY-MM-DD)
+
+            //이동인경우 날짜 넣기
+            use_start_date:null,
+            use_end_date:null,
+
+            //보관인경우 날짜 넣기
+            use_start_time:'09:00:00',
+            use_end_time:'21:00:00',
+            use_start_location:null,
+            use_end_location:null,
+            use_keep_location:'서울',
+
+            shopping_bag_count:$keepBag1.value,
+            carrier_small_coun:$keepBag2.value,
+            carrier_large_count:$keepBag3.value,
+            other_items:'',
+            inquiries:$commentOutput.innerHTML,
+            type:'keep',
+            status:'pending',
+            total_price:'123123',
+            payment_status:'pending'
         }
-    ])
+    ]);
+    alert('예약되었습니다.');
 })
 
 //페이지 랜더링(html, css 화면이 보여지는 것) 끝나자마자 바로 실행.

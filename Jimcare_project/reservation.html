@@ -132,7 +132,7 @@
                         <div class="flex items-center gap-5 mb-3">
                             <h3 class="text-gray-700">짐 맡길 시간</h3>
                             <select class="w-[100px] p-2 border border-gray-300 rounded-lg shadow-sm
-                                focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                focus:outline-none focus:ring-2 focus:ring-blue-500" id="jim-start-hour">
                                 <option value="">시</option>
                                 <option value="00" selected>00</option>
                                 <option value="01">01</option>
@@ -149,7 +149,7 @@
                                 <option value="12">12</option>
                             </select>
                             <select class="w-[100px] p-2 border border-gray-300 rounded-lg shadow-sm
-                                focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                focus:outline-none focus:ring-2 focus:ring-blue-500" id="jim-start-min">
                                 <option value="">분</option>
                                 <option value="00">00</option>
                                 <option value="20">20</option>
@@ -158,7 +158,7 @@
 
                             <h3 class="text-gray-700">짐 찾을 시간</h3>
                             <select class="w-[100px] p-2 border border-gray-300 rounded-lg shadow-sm
-                                focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                focus:outline-none focus:ring-2 focus:ring-blue-500" id="jim-end-hour">
                                 <option value="">시</option>
                                 <option value="00">00</option>
                                 <option value="01">01</option>
@@ -175,7 +175,7 @@
                                 <option value="12">12</option>
                             </select>
                             <select class="w-[100px] p-2 border border-gray-300 rounded-lg shadow-sm
-                                focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                focus:outline-none focus:ring-2 focus:ring-blue-500" id="jim-end-min">
                                 <option value="">분</option>
                                 <option value="00">00</option>
                                 <option value="20">20</option>
@@ -375,8 +375,8 @@
 
         <div class="text-center">
             <div class="mt-5 mb-10">
-                <input type="checkbox" name="agree" id="agree"> <label for="agree" class="cursor-pointer">개인정보제공에
-                동의합니다.</label>
+                <input type="checkbox" name="agree" id="agree">
+                <label for="agree" class="cursor-pointer">개인정보제공에동의합니다.</label>
             </div>
             <div>
                 <button class="bg-amber-300 px-12
@@ -444,7 +444,7 @@
             <div class="p-1 pl-3 border border-gray-300 rounded-lg shadow-sm ml-1 flex flex-col gap-2" style="flex:1"
                  id="r-comment">
                 >
-                    당부사항
+                당부사항
             </div>
         </div>
         <div class="flex justify-center gap-5">
