@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="aa"><span id="my-text1">음...</span></div>
+    <div id="bb" style="display: none"><span id="my-text2">음...</span></div>
+    <button>버튼</button>
+</body>
+</html>
+<script>
+    const $aa = document.querySelector('#aa');
+    const $bb = document.querySelector('#bb');
+    const button = document.querySelector('button');
+    const $myText2 = document.querySelector('#my-text2');
+
+    button.addEventListener('click', () => {
+        $aa.style.display = 'none';
+        $bb.style.display = 'block';
+        $myText2.innerHTML =" 백팩 1개";
+    });
+
+</script>

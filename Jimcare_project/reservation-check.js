@@ -36,7 +36,7 @@ const $keepOutBag3 = document.querySelector('#keep-out-bag3');
 const $totalPrice = document.querySelector('#total-price');
 
 const $confirmReserve = document.querySelector('#confirm-reserve');
-const $updateReserve = document.querySelector('#update-reserve');
+const $resetReserve = document.querySelector('#reset-reserve');
 const $submitReserve = document.querySelector('#submit-reserve');
 
 const $step01 = document.querySelector('#step01');
@@ -45,29 +45,7 @@ const $step02 = document.querySelector('#step02');
 var dbConnect = supabase.createClient('https://rnzhzcfovaqfsjfxorfq.supabase.co',
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuemh6Y2ZvdmFxZnNqZnhvcmZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk0MjQ4MzAsImV4cCI6MjA1NTAwMDgzMH0.lC3jUF1yLH5RA0rMZ-ApWOuoTmWHQT7b1ihZXR50xhM');
 
-$select.addEventListener('change', function (e) {
-    if (e.target.value === 'jim-keep') {
-        $etc1.classList.remove('hidden');
-        $etc2.classList.add('hidden');
-
-        $divService.classList.remove('h-20');
-        $divService.classList.add('h-100');
-    } else if (e.target.value === 'jim-move') {
-        $etc1.classList.add('hidden');
-        $etc2.classList.remove('hidden');
-
-        $divService.classList.remove('h-20');
-        $divService.classList.add('h-100');
-    } else {
-        $etc1.classList.add('hidden');
-        $etc2.classList.add('hidden');
-
-        $divService.classList.remove('h-100');
-        $divService.classList.add('h-20');
-    }
-});
-
-$confirmReserve.addEventListener('click', function (e) {
+$confirmReserve.addEventListener('click', async function (e) {
     // false 이면... return
     if (!($agreeInput.checked)) {
         alert('개인정보 취급 방침에 동의하셔야 합니다.')
@@ -78,26 +56,43 @@ $confirmReserve.addEventListener('click', function (e) {
         $nameInput.focus();
         return;
     }
+    if ($phoneInput.value === '') {
+        alert('핸드폰번호를 입력하세요.');
+        $phoneInput.focus();
+        return;
+    }
 
-    $jimStartTime.innerHTML = $jimStartHour.value+' 시'+$jimStartMin.value+' 분';
-    $jimEndTime.innerHTML = $jimEndHour.value+' 시'+$jimEndMin.value+' 분';
+    const res = await dbConnect
+        .from('reservation')
+        .select('*')
+        .eq('name',$nameInput.value)
+        .eq('phone',$phoneInput.value);
+
+    console.log(res);
+    console.log(res.data.length);
+    console.log(res.status);
+
+    // $jimStartTime.innerHTML = $jimStartHour.value + ' 시' + $jimStartMin.value + ' 분';
+    // $jimEndTime.innerHTML = $jimEndHour.value + ' 시' + $jimEndMin.value + ' 분';
     // 예약자 이름 설정
-    $nameOutput.innerHTML = $nameInput.value;
-    $phoneOutput.innerHTML = $phoneInput.value;
-    $dateOutput.innerHTML = $useDateInput.value;
-    $commentOutput.innerHTML = $commentInput.value;
+    $nameOutput.innerHTML = res.data[0].name;
+    $phoneOutput.innerHTML = res.data[0].phone;
+    $dateOutput.innerHTML = res.data[0].use_date_keep;
+    $commentOutput.innerHTML = res.data[0].inquiries;
 
-    $keepOutBag1.innerHTML = $keepBag1.value;
-    $keepOutBag2.innerHTML = $keepBag2.value;
-    $keepOutBag3.innerHTML = $keepBag3.value;
+    $keepOutBag1.innerHTML = res.data[0].shopping_bag_count;
+    $keepOutBag2.innerHTML = res.data[0].carrier_small_count;
+    $keepOutBag3.innerHTML = res.data[0].carrier_large_count;
 
-    $totalPrice.innerHTML = Number($keepBag1.value) * 3000 + Number($keepBag2.value) * 4000 + Number($keepBag3.value) * 3000;
+    $totalPrice.innerHTML = Number(res.data[0].shopping_bag_count) * 3000
+        + Number(res.data[0].carrier_small_count) * 4000
+        + Number(res.data[0].carrier_large_count) * 3000;
 
-    $step01.classList.add('hidden');
-    $step02.classList.remove('hidden');
+    $step01.classList.add('hidden');    // step01 숨겨라
+    $step02.classList.remove('hidden'); // step02 보여줘라
 });
 
-$updateReserve.addEventListener('click', function (e) {
+$resetReserve.addEventListener('click', function (e) {
     $step02.classList.add('hidden');
     $step01.classList.remove('hidden');
 })
@@ -166,27 +161,3 @@ $submitReserve.addEventListener('click', async function (e) {
 // }
 //
 // person.doPrint();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
