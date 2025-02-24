@@ -6,9 +6,9 @@ Object.defineProperties(person, "1Name", {
     value: "길동",
     writable: true,
     enumberable: false,
-    consigurable: true
+    consigurable: false
 })
 
 Object.defineProperties(person, "age", {
-    value: 20;
+    value: 20,
 })
