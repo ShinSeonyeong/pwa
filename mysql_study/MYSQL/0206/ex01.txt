@@ -1,0 +1,8 @@
+-- 문제 1: Customers 테이블에서 모든 고객의 이름과 도시를 출력하세요.
+-- select CustomerName, City from Customers;
+-- 문제 2: Customers 테이블에서 USA에 사는 고객들의 이름과 주소를 출력하세요.
+-- select CustomerName, City from Customers where Country = "USA";
+-- 문제 3: Customers 테이블에서 customer_id가 89인 고객의 모든 정보를 출력하세요.
+-- select * from Customers where CustomerID = 89;
+-- 문제 4: Products테이블에서 가격이 100 이상인 제품들의 이름과 가격을 출력하세요.
+-- select ProductName, Price from Products where Price > 100;

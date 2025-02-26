@@ -1,0 +1,10 @@
+-- 1. Products테이블 price가 50보다 큰 모든 제품의 이름과 가격을 출력하세요.
+-- select ProductName, Price from Products where Price  50;
+
+-- 2. Orders테이블 2023년 1월 1일 이후에 주문한 모든 주문의 
+--   order_id와 order_date를 출력하세요.
+-- select OrderID, OrderDate from Orders where OrderDate  '1997-07-05';
+
+-- 3. Orders테이블 order_id가 10보다 작은 모든 주문의 
+--   주문 날짜(order_date)를 출력하세요.
+-- select OrderDate from Orders where OrderID  10;
