@@ -1,0 +1,43 @@
+1. Customers 테이블의 모든 데이터를 조회하는 SQL 문을 작성하세요.
+SELECT * FROM Customers;
+
+2. Customers 테이블에서 CustomerName, City, Country 컬럼만 조회하세요.
+select CustomerName, City, Country from Customers;
+
+3-1. Orders 테이블에서 EmployeeID가 5인 주문을 조회하세요.
+select * from Orders where EmployeeID = 5;
+
+3-2. OrderDetails 테이블에서 Quantity가 10 미만인 데이터만 조회하세요.
+select * from OrderDetails where Quantity < 10;
+
+4-1. Customers 테이블에서 Country 기준으로 오름차순 정렬된 데이터를 조회하세요.
+select * from Customers order by Country asc;
+
+4-2. OrderDetails 테이블에서 ProductID를 오름차순, Quantity를 내림차순으로 정렬하세요.
+select * from OrderDetails order by ProductID asc, Quantity desc ;
+
+5. Customers 테이블에서 상위 5개 고객 정보만 조회하세요.
+select * from Customers limit 5;
+
+6. Customers 테이블에서 CustomerID를 "ID", CustomerName을 "고객명", Address를 "주소"로 변경하여 조회하세요.
+select CustomerID as "ID", CustomerName as "고객명", Address as "주소" from Customers;
+
+7. Customers 테이블에서 City가 'Paris' 또는 Country가 'Germany'인 고객을 조회하세요.
+CustomerName 기준으로 오름차순 정렬하세요.
+상위 3개의 데이터만 조회하세요.
+CustomerID를 "아이디", CustomerName을 "고객명", City를 "도시", Country를 "국가"로 출력하세요.
+select CustomerID as "아이디", CustomerName as "고객명", City as "도시", Country as "국가" from Customers 
+where ( City = 'Paris' or Country = 'Germany' )
+order by CustomerName asc
+limit 3;
+
+8. Orders 테이블에서 1997년 1월 1일 이후 주문된 데이터만 조회하세요.
+select * from Orders
+where OrderDate > '1997-01-01';
+
+9. OrderDetails 테이블에서 Quantity가 5 이상 10 이하인 데이터를 조회하세요.
+select * from OrderDetails  
+where Quantity between 5 and 10;
+
+10. Customers 테이블에서 Country별 고객 수를 그룹화하여 조회하세요.
+select Country from Customers group by Country;
