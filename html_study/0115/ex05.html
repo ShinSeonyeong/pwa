@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            background-color: rgb(200, 200, 200);
+            
+        }
+
+        div>p {
+            color: blue;
+        }
+
+        #fpp:hover+p {
+            background-color: wheat;
+            
+            animation: qwerqwer;
+            animation-duration: 5s;
+            animation-iteration-count: infinite;
+        }
+
+        #fpp ~ p {
+            text-decoration: underline;
+        }
+
+        @keyframes qwerqwer {
+            from {
+                background-color: rgb(0, 0, 0);
+            }
+
+            to {
+                background-color: rgb(196, 236, 233);
+                transform: rotate(20deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <p id="fpp">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam doloribus ab, dolor consectetur
+            alias
+            explicabo cumque necessitatibus soluta quo magni, delectus nam eligendi! Suscipit illum eum, excepturi natus
+            architecto aut?</p>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis mollitia dolorem ipsa numquam reiciendis,
+            dolor ad molestiae voluptas, incidunt a aliquid quae quasi, exercitationem possimus blanditiis
+            aspernatur. Corrupti, reiciendis beatae?</p>
+        <section>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis mollitia dolorem ipsa numquam reiciendis,
+                dolor ad molestiae voluptas, incidunt a aliquid quae quasi, exercitationem possimus blanditiis
+                aspernatur. Corrupti, reiciendis beatae?</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis mollitia dolorem ipsa numquam reiciendis,
+                dolor ad molestiae voluptas, incidunt a aliquid quae quasi, exercitationem possimus blanditiis
+                aspernatur. Corrupti, reiciendis beatae?</p>
+        </section>
+    </div>
+</body>
+
+</html>

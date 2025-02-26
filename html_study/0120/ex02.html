@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가변그리드레이아웃</title>
+</head>
+<style>
+    *{margin: 0; padding: 0; box-sizing: border-box;}
+    #wrap{
+        margin: 0 auto;
+        width: 960px;
+        background-color: rgb(230, 230, 230);
+    }
+    .row{
+        overflow: hidden;
+    }
+    .col{float: left; overflow: hidden; padding: 0.5rem;}
+    .col-1{width: 80px; background-color: rgb(160,200,150);}    .col-2{width: 160px;}    .col-3{width: 240px;}
+    .col-4{width: 320px;}    .col-5{width: 400px;}    .col-6{width: 480px;}
+    .col-7{width: 560px;}    .col-8{width: 640px;}    .col-9{width: 72px;}
+    .col-10{width: 800px;}    .col-11{width: 880px; background-color: rgb(159, 205, 241);}    .col-12{width: 960px;}
+</style>
+<body>
+    <div id="wrap">
+        <div class="row">
+            <div class="col col-1">
+                <h1>lorem</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+            <div class="col col-11">
+                <h1>lorem</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat explicabo magnam, optio architecto alias facilis. Similique earum adipisci exercitationem, molestiae, aliquam rerum nostrum quasi sint quia maiores ipsum quas est.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-5">
+                <h1>lorem</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo repellat aliquid veritatis magnam est sed, fugiat pariatur sunt itaque quam tempore minus necessitatibus obcaecati, similique, dicta incidunt iusto provident doloremque?</p>
+            </div>
+            <div class="col col-4">
+                <h1>lorem</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo repellat aliquid veritatis magnam est sed, fugiat pariatur sunt itaque quam tempore minus necessitatibus obcaecati, similique, dicta incidunt iusto provident doloremque?</p>
+            </div>
+            <div class="col col-3">
+                <h1>lorem</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo repellat aliquid veritatis magnam est sed, fugiat pariatur sunt itaque quam tempore minus necessitatibus obcaecati, similique, dicta incidunt iusto provident doloremque?</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-4">
+                <h1>lorem</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo repellat aliquid veritatis magnam est sed, fugiat pariatur sunt itaque quam tempore minus necessitatibus obcaecati, similique, dicta incidunt iusto provident doloremque?</p>
+            </div>
+            <div class="col col-4">
+                <h1>lorem</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo repellat aliquid veritatis magnam est sed, fugiat pariatur sunt itaque quam tempore minus necessitatibus obcaecati, similique, dicta incidunt iusto provident doloremque?</p>
+            </div>
+            <div class="col col-4">
+                <h1>lorem</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo repellat aliquid veritatis magnam est sed, fugiat pariatur sunt itaque quam tempore minus necessitatibus obcaecati, similique, dicta incidunt iusto provident doloremque?</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-8">
+                <h1>lorem</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo repellat aliquid veritatis magnam est sed, fugiat pariatur sunt itaque quam tempore minus necessitatibus obcaecati, similique, dicta incidunt iusto provident doloremque?</p>
+            </div>
+            <div class="col col-4">
+                <h1>lorem</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo repellat aliquid veritatis magnam est sed, fugiat pariatur sunt itaque quam tempore minus necessitatibus obcaecati, similique, dicta incidunt iusto provident doloremque?</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-7">
+                <h1>lorem</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo repellat aliquid veritatis magnam est sed, fugiat pariatur sunt itaque quam tempore minus necessitatibus obcaecati, similique, dicta incidunt iusto provident doloremque?</p>
+            </div>
+            <div class="col col-5">
+                <h1>lorem</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo repellat aliquid veritatis magnam est sed, fugiat pariatur sunt itaque quam tempore minus necessitatibus obcaecati, similique, dicta incidunt iusto provident doloremque?</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-6">
+                <h1>lorem</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo repellat aliquid veritatis magnam est sed, fugiat pariatur sunt itaque quam tempore minus necessitatibus obcaecati, similique, dicta incidunt iusto provident doloremque?</p>
+            </div>
+            <div class="col col-3">
+                <h1>lorem</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo repellat aliquid veritatis magnam est sed, fugiat pariatur sunt itaque quam tempore minus necessitatibus obcaecati, similique, dicta incidunt iusto provident doloremque?</p>
+            </div>
+            <div class="col col-3">
+                <h1>lorem</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo repellat aliquid veritatis magnam est sed, fugiat pariatur sunt itaque quam tempore minus necessitatibus obcaecati, similique, dicta incidunt iusto provident doloremque?</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

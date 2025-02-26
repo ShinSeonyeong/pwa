@@ -1,0 +1,9 @@
+progress {
+    width: 100px;
+    height: 40px;
+}
+
+p {
+    color: blue;
+    font-size: 22px;
+}
