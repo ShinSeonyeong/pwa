@@ -26,4 +26,4 @@ function people_select() {
     connection.end();
 }
 
-module.exports = {people_select}
+module.exports = { people_select }
