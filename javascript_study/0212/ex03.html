@@ -1,0 +1,46 @@
+<!--deep dive 48p쯤에 자세히 나옴.-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        <!--클래스 asdf를 만들었음-->
+        .asdf {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(180, 200, 250);
+        }
+    </style>
+</head>
+<body>
+<input id="aa"/>
+<button id="btn">누르면 input창의 값이 div에 나옴</button>
+<div id="print"></div>
+</body>
+</html>
+<script>
+    var $aa = document.querySelector('#aa');
+    var $btn = document.querySelector('#btn');
+    var $print = document.querySelector('#print');
+
+    $btn.addEventListener('mouseover', function () {
+        // <style>태그에 넣어줌 -> .asdf 사용함.
+        // $print.style.width = '100px';
+        // $print.style.height = '100px';
+        // $print.style.backgroundColor = 'rgb(150, 200, 250)';
+        $print.classList.add('asdf');
+    });
+    $print.addEventListener('mouseover', function () {
+        $print.classList.add('asdf');
+    });
+    $print.addEventListener('mouseout', function () {
+        $print.classList.remove('asdf');
+    });
+    $btn.addEventListener('click', function () {
+        $print.innerHTML += $aa.value;
+    });
+</script>
