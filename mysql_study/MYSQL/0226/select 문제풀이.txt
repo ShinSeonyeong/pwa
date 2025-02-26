@@ -26,6 +26,7 @@ select CustomerID as "ID", CustomerName as "고객명", Address as "주소" from
 CustomerName 기준으로 오름차순 정렬하세요.
 상위 3개의 데이터만 조회하세요.
 CustomerID를 "아이디", CustomerName을 "고객명", City를 "도시", Country를 "국가"로 출력하세요.
+
 select CustomerID as "아이디", CustomerName as "고객명", City as "도시", Country as "국가" from Customers 
 where ( City = 'Paris' or Country = 'Germany' )
 order by CustomerName asc
