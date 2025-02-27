@@ -1,6 +1,6 @@
 const mysql = require('mysql2');
 
-function people_insert() {
+function people_insert(name, age) {
     const dbInfo = {
         host: '192.168.0.42',
         user: 'root',
@@ -14,7 +14,8 @@ function people_insert() {
     connection.connect();
 
     const sql = 'insert into people (person_name, age) values (?,?)'
-    const values = ['신규건', 25]
+    const values = [name, age]
+    console.log(name, age)
 
     connection.query(sql, values, (error, result, fields) => {
         if (error) throw error;
