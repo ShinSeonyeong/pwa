@@ -12,6 +12,16 @@
 
         const supabase = window.supabase.createClient(supabaseUrl, supabasePassword);
     </script>
+<style>
+    table{
+        width: 100%;
+    }
+    table, td{
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+    }
+</style>
 </head>
 
 <body>
@@ -45,7 +55,31 @@
     // users테이블 모든 내용 가져와서 출력하는 함수
     async function usersSelect(email) {
         const res = await supabase.from('users').select()
-        console.log(res);
-        $usersDiv.innerHTML = JSON.stringify(res.data);
+        let rows = '';
+        for (let i = 0; i < res.data.length; i++) {
+            rows = rows + `
+            <tr>
+                <td>${res.data[i].id}</td>
+                <td>${res.data[i].name}</td>
+                <td>${res.data[i].email}</td>
+                <td>${res.data[i].created_at}</td>
+                <td>${res.data[i].active}</td>
+            </tr>`;
+        }
+
+        let users = `
+        <div>
+            <table>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>email</th>
+                    <th>가입날짜</th>
+                    <th>활성화</th>
+                </tr>
+                ${rows}
+            </table>
+        </div>`;
+        $usersDiv.innerHTML = users;
     }
 </script>
