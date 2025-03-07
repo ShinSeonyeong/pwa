@@ -26,11 +26,13 @@
         2.id부여 후 queryselect->addEventListner('click', function(){})-->
     <button onclick="usersSelect();">USERS조회</button>
     <button onclick="ordersSelect();">ORDERS조회</button>
-    <button onclick="ordersSelect();">POST조회</button>
+    <button onclick="postSelect();">POST조회</button>
     <h1 style="cursor:pointer;" onclick="userToggle()">유저</h1>
     <div id="users-div" class="content"></div>
     <h1 style="cursor:pointer;" onclick="orderToggle()">주문</h1>
     <div id="orders-div" class="content"></div>
+    <h1 style="cursor:pointer;" onclick="postToggle()">글조회</h1>
+    <div id="post-div" class="content"></div>
 
     <div>
         이름<input type="text" id="name" /><br />
@@ -41,6 +43,10 @@
         상품명<input type="text" id="product_name" /><br />
         상품가격<input type="text" id="price" />
         <button id="input-button-order">ORDERS입력</button>
+    </div>
+    <div>
+        글쓰기<input type="text" id="post" />
+        <button id="input-button-post">글입력</button>
     </div>
 </body>
 
@@ -71,9 +77,12 @@
         document.querySelector('#users-div').classList.toggle('show');
     }
     function orderToggle(){
-        console.log('wnansn');
         document.querySelector('#orders-div').classList.toggle('show');
+    }
+    function postToggle(){
+        document.querySelector('#post-div').classList.toggle('show');
     }
 </script>
 <script src="users.js"></script>
 <script src="orders.js"></script>
+<script src="post.js"></script>
