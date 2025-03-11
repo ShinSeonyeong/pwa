@@ -54,7 +54,7 @@ async function usersSelect(email) {
     let rows = '';
     for (let i = 0; i < res.data.length; i++) {
         rows = rows + `
-            <tr onclick='userRowClick(this);'>
+            <tr onclick='userRowClick(this);' style='cursor:pointer;'>
                 <td>${res.data[i].id}</td>
                 <td>${res.data[i].name}</td>
                 <td>${res.data[i].email}</td>
@@ -80,6 +80,44 @@ async function usersSelect(email) {
     $usersDiv.classList.add('show');
 }
 
-function userRowClick(trTag){
-    alert(trTag);
+function userRowClick(trTag) {
+    const $updateUserId = document.querySelector('#update-user-id');
+    const $updateName = document.querySelector('#update-name');
+    const $updateEmail = document.querySelector('#update-email');
+
+    const userId = trTag.children[0].innerText;
+    const userName = trTag.children[1].innerText;
+    const userEmail = trTag.children[2].innerText;
+
+    $updateUserId.innerHTML = userId;
+    $updateName.value = userName;
+    $updateEmail.value = userEmail;
+
+    const $modal = document.querySelector('#modal');
+    $modal.classList.remove('hidden');
 }
+
+document.querySelector('#update-button-user').addEventListener('click', async function () {
+    const $updateUserId = document.querySelector('#update-user-id');
+    const $updateName = document.querySelector('#update-name');
+    const $updateEmail = document.querySelector('#update-email');
+
+    const res = await supabase
+        .from('users')
+        .update({
+            name: $updateName.value,
+            email: $updateEmail.value
+        })
+        .eq('id', $updateUserId.innerHTML)
+        .select();
+    if (res.status == 200) {
+        const $modal = document.querySelector('#modal');
+        $modal.classList.add('hidden');
+        Swal.fire({
+            title: "수정성공",
+            icon: "success",
+            draggable: true
+        });
+        usersSelect();
+    }
+})
