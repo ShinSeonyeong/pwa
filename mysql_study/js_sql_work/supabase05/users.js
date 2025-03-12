@@ -95,7 +95,7 @@ function userRowClick(trTag) {
     $updateName.value = userName;
     $updateEmail.value = userEmail;
 
-    const $modal = document.querySelector('#modal');
+    const $modal = document.querySelector('#user-modal');
     $modal.classList.remove('hidden');
 }
 
@@ -113,7 +113,7 @@ document.querySelector('#update-button-user').addEventListener('click', async fu
         .eq('id', $updateUserId.innerHTML)
         .select();
     if (res.status == 200) {
-        const $modal = document.querySelector('#modal');
+        const $modal = document.querySelector('#user-modal');
         $modal.classList.add('hidden');
         Swal.fire({
             title: "수정성공",
