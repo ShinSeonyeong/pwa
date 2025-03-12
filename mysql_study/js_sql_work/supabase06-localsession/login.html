@@ -1,9 +1,10 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -15,14 +16,29 @@
         var supabase = window.supabase.createClient(supabaseUrl, supabasePassword);
     </script>
 </head>
+
 <body>
-<input type="text" name="" id="name" placeholder="Enter your name">
-<input type="text" name="" id="email" placeholder="Enter your email">
-<button onclick="login();">로그인</button>
+    <input type="text" name="" id="name" placeholder="Enter your name">
+    <input type="text" name="" id="email" placeholder="Enter your email">
+    <button onclick="login();">로그인</button>
 </body>
+
 </html>
 <script>
-    function login() {
-        alert("연결확인");
+    async function login() {
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        console.log('name' + name);
+        console.log('email' + email);
+        const res = await supabase.from('users').select('*').eq('name', name).eq('email', email);
+        console.log(res);
+        if (res.data.length > 0) {
+            await sessionStorage.setItem("user", JSON.stringify(res.data[0]));
+            alert('success');
+            //호스트객체: document, location
+            location.href='users-orders.html';
+        } else {
+            alert('Please check your name, email address');
+        }
     }
 </script>
