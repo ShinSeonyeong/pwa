@@ -33,26 +33,6 @@ document.querySelector('#input-button-user').addEventListener('click', async fun
             text: "user입력에 실패하였습니다. email을 중복입니다.",
             // footer: '<a href="#">Why do I have this issue?</a>'
         });
-        // await Swal.fire({
-        //     title: "<strong>HTML <u>새로운예제</u></strong>",
-        //     icon: "info",
-        //     html: `
-        //       Yㅁ니아러ㅜ미나어뤼나어루<b>bold text</b>,
-        //       <a href="#" autofocus>links</a>,
-        //       and other HTML tags
-        //     `,
-        //     showCloseButton: true,
-        //     showCancelButton: true,
-        //     focusConfirm: false,
-        //     confirmButtonText: `
-        //       <i class="fa fa-thumbs-up"></i> Great!
-        //     `,
-        //     confirmButtonAriaLabel: "Thumbs up, great!",
-        //     cancelButtonText: `
-        //       <i class="fa fa-thumbs-down"></i>
-        //     `,
-        //     cancelButtonAriaLabel: "Thumbs down"
-        // });
     }
     else if (res.status === 201) {
         await Swal.fire({
