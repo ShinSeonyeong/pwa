@@ -1,17 +1,19 @@
-function solution(m, n) {
-    var answer = [];
-
-    const max = m > n ? m : n;
-    for (let i = 1; i <= max; i++) {
-        if (m % i == 0 && n % i == 0) {
-            answer[0] = i;
-            console.log(i);
+function solution(numbers) {
+    let answer = [];
+    const myset = new Set(); //중복제거해줌
+    for (let i = 0; i < numbers.length; i++) {
+        const a = numbers[i];
+        for (let j = 0; j < numbers.length; j++) {
+            const b = numbers[j];
+            if (i != j) {
+                // answer.push(a + b);
+                myset.add(a + b);
+            }
         }
     }
-
-    answer[1] = (m * n) / answer[0];
-
+    answer = [...myset];
+    answer.sort((a, b) => a - b);
     return answer;
 }
 
-console.log(solution(3, 12));
+console.log(solution([2, 1, 3, 4, 1]));

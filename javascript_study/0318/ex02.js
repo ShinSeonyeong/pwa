@@ -1,19 +1,24 @@
-const arr = [
-    { name: 'Alice', age: 20 },
-    { name: 'Bob', age: 25 },
-    { name: 'Charlie', age: 30 }
-];
+function Person(name, age) {
+    this.name = name;
+    let _age = age; // 캡슐화와 정보은닉
 
-const brr = [
-    "<td>{ name: 'Alice', age: 20 }</td>",
-    "<td>{ name: 'Bob', age: 25 }</td>",
-    "<td>{ name: 'Charlie', age: 30 }</td>"
-];
+    this.sayHi = function(){
+        console.log(`this.name ${this.name}, _age ${_age}`);
+    }
 
-for (let i = 0; i < arr.length; i++) {
-    console.log(arr[i]);
+    this.setAge = function(age){
+        if(age<0){
+            console.log("적용불가");
+        }
+        _age = age;
+    }
 }
 
-arr.forEach(obj => {
-    console.log(obj);
-})
+const me = new Person('John Doe', 30);
+me.sayHi(); // this.name John Doe, _age 30
+
+const you = new Person('Jane Smith', 25);
+you.sayHi(); // this.name Jane Smith, _age 25
+
+console.log(`me.name = ${me.name}`); // me.name = John Doe
+console.log(`me._age = ${me._age}`); // me._age = undefined
