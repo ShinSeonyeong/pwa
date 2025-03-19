@@ -60,6 +60,13 @@ document.getElementById('logout').addEventListener('click', async () => {
     alert('logout');
 });
 
+document.getElementById('kakao-login').addEventListener('click', async () => {
+    const res = await supabase.auth.signInWithOAuth({
+        provider: 'kakao'
+    })
+    console.log(res);
+});
+
 document.addEventListener('DOMContentLoaded', async function () {
     const res = await supabase.auth.getUser(); // 현재 로그인되었는지 상태확인
     console.log(res);
