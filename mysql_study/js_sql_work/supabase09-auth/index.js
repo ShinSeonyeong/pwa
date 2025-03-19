@@ -57,9 +57,14 @@ document.getElementById('login').addEventListener('click', async () => {
 });
 
 document.getElementById('logout').addEventListener('click', async () => {
-    alert('logout');
+    const res = await supabase.auth.signOut();
+
+    // 기록 확인
+    const $loginStatus = document.getElementById('login-status');
+    $loginStatus.innerHTML = `로그아웃 되었습니다.`;
 });
 
+// 카카오 로그인
 document.getElementById('kakao-login').addEventListener('click', async () => {
     const res = await supabase.auth.signInWithOAuth({
         provider: 'kakao'
