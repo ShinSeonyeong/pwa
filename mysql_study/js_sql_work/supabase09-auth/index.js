@@ -74,9 +74,10 @@ document.getElementById('kakao-login').addEventListener('click', async () => {
 
 document.addEventListener('DOMContentLoaded', async function () {
     const res = await supabase.auth.getUser(); // 현재 로그인되었는지 상태확인
-    console.log(res);
 
     // 로그인 기록 확인
-    const $loginStatus = document.getElementById('login-status');
-    $loginStatus.innerHTML = `로그인된 ${res.data.user.email}`;
+    if (res.data.user) {
+        const $loginStatus = document.getElementById('login-status');
+        $loginStatus.innerHTML = `로그인된 ${res.data.user.email}`;
+    }
 })
