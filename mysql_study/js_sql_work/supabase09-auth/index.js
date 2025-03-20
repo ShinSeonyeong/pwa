@@ -1,7 +1,23 @@
-const supabaseUrl = "https://stboidhsrvtzuejzwlmb.supabase.co";
-const supabaseAnonkey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN0Ym9pZGhzcnZ0enVlanp3bG1iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIyNzU3MzYsImV4cCI6MjA1Nzg1MTczNn0.UW0-PabMBGulAwC-f64JNyCUCWOF_z8QET57MUeKeVY";
+// const supabaseUrl = "https://stboidhsrvtzuejzwlmb.supabase.co";
+// const supabaseAnonkey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN0Ym9pZGhzcnZ0enVlanp3bG1iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIyNzU3MzYsImV4cCI6MjA1Nzg1MTczNn0.UW0-PabMBGulAwC-f64JNyCUCWOF_z8QET57MUeKeVY";
+
+// const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonkey);
+
+const supabaseUrl = "https://zgrjjnifqoactpuqolao.supabase.co";
+const supabaseAnonkey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpncmpqbmlmcW9hY3RwdXFvbGFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEyNDc0NTgsImV4cCI6MjA1NjgyMzQ1OH0._Vl-6CRKdMjeDRyNoxlfect7sgusZ7L0N5OYu0a5hT0";
 
 const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonkey);
+
+document.getElementById('review-save-btn').addEventListener('click', async function(){
+    const name = document.getElementById('review-name').value;
+    const title = document.getElementById('review-title').value;
+    const password = document.getElementById('review-password').value;
+    const review = document.getElementById('review-txt').value;
+
+    // user의 uuid 가져와야 함. 
+    const res = await supabase.auth.getUser();
+    console.log(res.data.user.id);
+});
 
 document.getElementById('sign').addEventListener('click', async function () {
     const $email = document.getElementById('email').value;
@@ -16,7 +32,7 @@ document.getElementById('sign').addEventListener('click', async function () {
         return;
     }
 
-    this.disabled = false;
+    this.disabled = true;
     this.innerHTML = "회원가입 중..."
 
     // insert 회원가입 되는 부분: 작성한 메일주소로 메일이 날아감. 
@@ -27,6 +43,7 @@ document.getElementById('sign').addEventListener('click', async function () {
     } else {
         alert('회원가입 성공, 이메일 인증 후 로그인하세요.');
         this.innerHTML = "회원가입";
+        this.disabled = "";
     }
 });
 
@@ -53,6 +70,12 @@ document.getElementById('login').addEventListener('click', async () => {
         alert('로그인 되었습니다.');
         document.getElementById('email').value = '';
         document.getElementById('password').value = '';
+
+        const res = await supabase.auth.getUser();
+        if (res.data.user) {
+            const $loginStatus = document.getElementById('login-status');
+            $loginStatus.innerHTML = `로그인된 ${JSON.stringify(res.data.user)}`;
+        }
     }
 });
 
@@ -78,6 +101,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     // 로그인 기록 확인
     if (res.data.user) {
         const $loginStatus = document.getElementById('login-status');
-        $loginStatus.innerHTML = `로그인된 ${res.data.user.email}`;
+        $loginStatus.innerHTML = `로그인된 ${JSON.stringify(res.data.user)}`;
     }
 })
