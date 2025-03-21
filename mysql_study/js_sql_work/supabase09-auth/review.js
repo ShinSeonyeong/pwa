@@ -11,7 +11,7 @@ async function selectReview() {
     // console.log("params = " + params);
 
     const pageNum = params.get('pageNum') || 1;
-    console.log("pageNum = " + pageNum);
+    console.log("pageNum = " + pageNum); 
 
     // pageNum 1일 때 0~9
     // pageNum 2일 때 10~19
