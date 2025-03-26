@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import { createClient } from '@supabase/supabase-js';
 
@@ -7,8 +7,8 @@ const pwd = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZi
 const supabase = createClient(url, pwd);
 
 function App() {
-
   const [count, setCount] = useState(0);
+  const [pages, setPages] = useState([1, 2, 3, 4, 5]);
 
   const [data, setData] = useState([
     { review_num: 1, user_id: "40dcf945-4749-4891-8be1-cd7a431e39e3", name: "홍길동", title: "제목1", review_txt: "리뷰입니다11." },
@@ -20,20 +20,60 @@ function App() {
   //   return `<li>내용</li>`
   // })
   // console.log(retData);
+  // console.log(`pageNum = ` + pageNum);
 
-  console.log("App 랜더링");
+  useEffect (() => {
+    const fetchData = async () => {
+      // 총 페이지 개수 구하기
+      const total = (await supabase.from('review').select()).data.length;
+      let totalPage = Math.ceil(total / 5);
+
+      const temp = [];
+      for (let i = 0; i < totalPage; i++) {
+        temp.push(i + 1);
+        // console.log(`temp = `);
+        // console.log(temp);
+      }
+      setPages(temp);
+      // const temp = Array.from({ length: totalPage }, (_, i) => i + 1);
+      // console.log(`temp = `);
+      // console.log(temp);
+      // console.log(totalPage)
+      // console.log(Math.ceil(totablPage));
+
+      const params = new URLSearchParams(location.search);
+      const pageNum = params.get('pageNum') ?? "1";
+
+      const [from, to] = [(parseInt(pageNum) - 1) * 5, parseInt(pageNum) * 5 - 1]
+
+      const res = await supabase.from('review').select().range(from, to);
+      setData(res.data);
+    }
+    fetchData();
+  }, []);
+
+  console.log("호출됨");
 
   const getReview = async () => {
     const res = await supabase.from('review').select();
     setData(res.data);
-    console.log(res);
   }
 
   return (
     <>
+      <div style={{ display: 'flex', gap: '1rem' }}>
+        {
+          pages.map((item) => (
+            <a key={item} href={`?pageNum=${item}`}>{item}</a>
+          ))
+        }
+        {/* <a href='?pageNum=1'>1</a>
+        <a href='?pageNum=2'>2</a>
+        <a href='?pageNum=3'>3</a> */}
+      </div>
       <h1>count = {count}</h1>
       <button onClick={() => { setCount(count + 1) }}>count 증가</button>
-      <button onClick={getReview}>review 데이터 가져오기</button>
+      <button onClick={getReview}>review데이터 가져오기</button>
       {
         data.map(item => (
           <div key={item.review_num}>
