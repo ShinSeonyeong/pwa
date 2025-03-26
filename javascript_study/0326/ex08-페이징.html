@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module">
+        const supabaseUrl = "https://rnzhzcfovaqfsjfxorfq.supabase.co";
+        const supabasePassword = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuemh6Y2ZvdmFxZnNqZnhvcmZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk0MjQ4MzAsImV4cCI6MjA1NTAwMDgzMH0.lC3jUF1yLH5RA0rMZ-ApWOuoTmWHQT7b1ihZXR50xhM";
+        // supabase 연결
+        var supabase = window.supabase.createClient(supabaseUrl, supabasePassword);
+
+        // 브라우저 호스트객체 document, location
+        // console.log(location);
+        const params = new URLSearchParams(location.search);
+        const pageNum = params.get('pageNum') ?? '1'; // pageNum이 null일 때 pageNum에 1 값을 넣어줌. 
+
+        const res = await supabase.from('board').select('*');
+        // console.log(res);
+        // console.log(res.data.length);
+
+        let maxPage = res.data.length / 5;
+        maxPage = res.data.length % 5 > 0 ? 1 : 0;
+
+        console.log(Math.ceil(maxPage));
+
+        let pageHtml = "";
+        for (let i = 1; i < maxPage + 1; i++) {
+            pageHtml = pageHtml + `<a href="?pageNum=${i}">${i}</a>`;
+        }
+
+        console.log(pageHtml);
+
+        document.querySelector('#page-div').innerHTML = pageHtml;
+    </script>
+    <style>
+        h1:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="page-div"></div>
+</body>
+
+</html>
