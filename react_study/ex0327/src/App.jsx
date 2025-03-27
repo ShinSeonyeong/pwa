@@ -1,33 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
+import AA from './components/AA';
+import BB from './components/BB';
 
+// App component이다.
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [name, setName] = useState('홍길동');
+
+  useEffect(() => {
+    setCount(Number(localStorage.getItem('count')));
+    console.log("useEffect 호출됨");
+  }, []);
+
+  const addCount = () => { setCount(count + 1); localStorage.setItem('count', count + 1) };
+  const subCount = () => { setCount(count - 1); localStorage.setItem('count', count - 1) };
+  const changeName = () => { setName(name + '!') };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <BB addCount={addCount} subCount={subCount}></BB>
+      <AA aa="10" bb={20}></AA>
+      <h1>name = {name}</h1>
+      <button onClick={changeName}>이름변경</button>
+      <h1>count = {count}</h1>
+      <button onClick={addCount}>count증가</button>
+      <button onClick={subCount}>count감소</button>
     </>
   )
 }
