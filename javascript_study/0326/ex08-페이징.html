@@ -10,6 +10,7 @@
     <script type="module">
         const supabaseUrl = "https://rnzhzcfovaqfsjfxorfq.supabase.co";
         const supabasePassword = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuemh6Y2ZvdmFxZnNqZnhvcmZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk0MjQ4MzAsImV4cCI6MjA1NTAwMDgzMH0.lC3jUF1yLH5RA0rMZ-ApWOuoTmWHQT7b1ihZXR50xhM";
+
         var supabase = window.supabase.createClient(supabaseUrl, supabasePassword);
 
         // 브라우저 호스트객체 document, location
@@ -22,9 +23,9 @@
         // console.log(res.data.length);
 
         let maxPage = res.data.length / 5;
-        maxPage = res.data.length % 5 > 0 ? 1 : 0;
+        maxPage = maxPage + (res.data.length % 5 > 0 ? 1 : 0);
 
-        console.log(Math.ceil(maxPage));
+        console.log(maxPage);
 
         let pageHtml = "";
         for (let i = 1; i < maxPage + 1; i++) {
