@@ -52,7 +52,6 @@ function App() {
     fetchData();
   }, []);
 
-  console.log("호출됨");
 
   const getReview = async () => {
     const res = await supabase.from('review').select();
