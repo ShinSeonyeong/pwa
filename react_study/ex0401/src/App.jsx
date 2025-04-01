@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import './App.css';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import Calcu from '@/components/Calcu';
 
 function App() {
   let a = 10; // 10으로 초기화
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <>
+      <Calcu></Calcu>
       <h1>count = {count}</h1>
       <h1>a={a}</h1>
       <h1>useA={useA.current}</h1>
