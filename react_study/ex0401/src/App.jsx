@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useRef } from 'react';
+import './App.css';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 function App() {
-  const [count, setCount] = useState(0)
+  let a = 10; // 10으로 초기화
+  const useA = useRef(10); //메모리상에 참조되는 값이 있으니 그걸 가지고 오는 것. 화면 랜더링 될 때 변경
+
+  const [count, setCount] = useState(0);
+  const inputRef = useRef(null);
+
+  const handleClick = () => {
+    inputRef.current.focus();
+  };
+
+  useEffect(() => {
+    console.log('useEffect 호출');
+    handleClick();
+    // inputRef.current.focus();
+  });
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>count = {count}</h1>
+      <h1>a={a}</h1>
+      <h1>useA={useA.current}</h1>
+      <button
+        onClick={() => {
+          setCount(count + 1);
+        }}
+      >
+        카운트증가
+      </button>
+      <button
+        onClick={() => {
+          a = a + 1;
+          useA.current = useA.current + 1;
+          console.log('a, useA = ', a, useA.current);
+        }}
+      >
+        a증가
+      </button>
+      <input type="text" name="" id="" ref={inputRef} />
+      <button onClick={handleClick}>포커스 이동</button>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
