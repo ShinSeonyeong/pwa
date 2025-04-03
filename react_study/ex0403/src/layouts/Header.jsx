@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function Header() {
+  let uid;
+  useEffect(()=>{
+    uid = sessionStorage.getItem('uid');
+  })
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
       <Link to="/">
