@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 
 function Lotto(props) {
+    const [firstPrzwnerCo, setfirstPrzwnerCo] = useState(0);
     const [firstWinamnt, setfirstWinamnt] = useState(0);
     const [firstAccumamnt, setfirstAccumamnt] = useState(0);
     const [drwNoDate, setDrwNoDate] = useState(0);
@@ -33,17 +34,20 @@ function Lotto(props) {
 
         console.log(res); // 변경 값 출력
 
+
         setNumbers(([res.drwtNo1, res.drwtNo2, res.drwtNo3, res.drwtNo4, res.drwtNo5, res.drwtNo6])); // .then(json => setNumbers([res.drwtNo1, res.drwtNo2, res.drwtNo3, res.drwtNo4, res.drwtNo5, res.drwtNo6]))
         setDrwNo(res.drwNo);
         setBnusNo(res.bnusNo);
         setDrwNoDate(res.drwNoDate);
         setfirstAccumamnt(res.firstAccumamnt);
         setfirstWinamnt(res.firstWinamnt);
+        setfirstPrzwnerCo(res.firstPrzwnerCo);
     }
 
     useEffect(() => {
         getNumbers();
     }, []);
+
     return (
         <div>
             <h1>Lotto</h1>
@@ -52,8 +56,13 @@ function Lotto(props) {
             <h5>로또 추첨 날짜: {drwNoDate}</h5>
             <h5>총금액: {firstAccumamnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</h5>
             <h5>1인수령금액: {firstWinamnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</h5>
+            <h5>1등 당첨된 인원: {firstPrzwnerCo}명</h5>
             로또 회차번호: <input type="text" ref={inputRef}/>
             <button onClick={getNumbers}>조회</button>
+            <div>
+                <button onClick={getpreNumber}>이전회차</button>
+                <button onClick={getNumbers}>다음회차</button>
+            </div>
             <div style={{display: 'flex', gap: '1rem'}}>
                 {numbers.map(number => (
                     <div style={{
