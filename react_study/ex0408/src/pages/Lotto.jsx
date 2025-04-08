@@ -12,20 +12,24 @@ function Lotto() {
       `/api/common.do?method=getLottoNumber&drwNo=${drwNo}`
     );
     console.log(result.data);
-
-    setLottoNumbers([
-      result.data.drwtNo1,
-      result.data.drwtNo2,
-      result.data.drwtNo3,
-      result.data.drwtNo4,
-      result.data.drwtNo5,
-      result.data.drwtNo6,
-    ]);
+    if (result.data.returnValue === "success") {
+      setLottoNumbers([
+        result.data.drwtNo1,
+        result.data.drwtNo2,
+        result.data.drwtNo3,
+        result.data.drwtNo4,
+        result.data.drwtNo5,
+        result.data.drwtNo6,
+      ]);
+    } else {
+      alert(`${drwNo}회차 결과가 없습니다.`);
+      setDrwNo(drwNo - 1);
+    }
   }
 
   useEffect(() => {
     getLottoNumbers();
-  }, []);
+  }, [drwNo]); // drwNo 바뀌면 getLottoNumbers(); 값 바뀜
 
   return (
     <>
@@ -47,7 +51,7 @@ function Lotto() {
         >
           이전
         </button>
-        
+
         <button
           onClick={() => {
             setDrwNo(drwNo + 1);
