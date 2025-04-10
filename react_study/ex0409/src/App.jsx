@@ -36,7 +36,7 @@ function App() {
             안녕
           </MButton>
           <MButton variant="contained">하세요</MButton>
-          <MButton variant="outlined">점점</MButton>
+          <MButton variant="outlined">ㅇ</MButton>
         </Stack>
       </div>
       <ComboBox></ComboBox>
