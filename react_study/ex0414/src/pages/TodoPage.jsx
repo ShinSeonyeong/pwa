@@ -1,10 +1,10 @@
 import React from 'react';
 import {Card, Col, Layout, Row} from "antd";
-import styles from "./Review.module.css";
+import styles from "./TodoPage.module.css"
 
 const {Content} = Layout;
 
-function Review(props) {
+function TodoPage(props) {
     return (
         <Content>
             <Row>
@@ -26,4 +26,4 @@ function Review(props) {
     );
 }
 
-export default Review;
+export default TodoPage;
