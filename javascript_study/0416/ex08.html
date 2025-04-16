@@ -1,0 +1,38 @@
+<!-- js-master 39-33 -->
+<!DOCTYPE html>
+<html>
+  <body>
+    <ul id="fruits">
+      <li class="apple">Apple</li>
+      <li class="banana">Banana</li>
+      <li class="orange">Orange</li>
+    </ul>
+  </body>
+  <script>
+    const $fruits = document.getElementById("fruits");
+    console.log($fruits);
+
+    const { firstChild } = $fruits;
+    console.log(firstChild);
+
+    const { nextElementSibling } = firstChild;
+    console.log(nextElementSibling);
+
+    const { previousSibling } = nextElementSibling;
+    console.log(previousSibling);
+
+    console.time("innerHTML");
+    $fruits.innerHTML = `<li class="apple">Apple</li>
+      <li class="red">Banana</li>
+      <li class="red">Orange</li>
+      <li class="red">Grape</li>`;
+    console.timeEnd("innerHTML");
+
+    console.time("createElement"); // 속도 시간 확인방법.
+    const $addLi = document.createElement("li");
+    $addLi.textContent = "Grape";
+
+    $fruits.appendChild($addLi);
+    console.timeEnd("createElement");
+  </script>
+</html>
