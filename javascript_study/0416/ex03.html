@@ -1,0 +1,20 @@
+<!-- js-master 39-3 -->
+<!DOCTYPE html>
+<html>
+  <body>
+    <ul>
+      <li id="apple">Apple</li>
+      <li id="banana">Banana</li>
+      <li id="orange">Orange</li>
+    </ul>
+    <script>
+      const $elem = document.getElementsByTagName("li");
+      console.log($elem);
+
+      [...$elem].forEach((elem) => {
+        console.log(elem);
+        elem.style.color = "violet";
+      });
+    </script>
+  </body>
+</html>
