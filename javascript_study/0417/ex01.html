@@ -7,7 +7,7 @@
   </head>
   <body>
     <div>
-      <ul>
+      <ul id="fr">
         <li>Apple</li>
         <li>Banana</li>
         <li>Melon</li>
@@ -17,11 +17,38 @@
     </div>
 
     <script>
+      const $ul = document.getElementById("fr");
+
+      console.log($ul.childNodes.length);
+
+      // 요소노드 확인 2가지 방법
+      console.log($ul.childElementCount);
+      console.log($ul.children.length);
+
+      const result = $ul.lastChild;
+      console.log(result);
+      result.textContent = "텍스트내용추가";
+
       const htmlCollection = document.getElementsByTagName("li");
-      console.log(htmlCollection);
+      console.log(htmlCollection); // 실시간반영
 
       const nodeList = document.querySelectorAll("li");
-      console.log(nodeList);
+      console.log(nodeList); // 실시간미반영
+
+      function addLi() {
+        const $li = document.createElement("li");
+        $li.textContent = "🍉🍉🍉";
+        $ul.appendChild($li);
+
+        console.log(htmlCollection);
+      }
+
+      function delLi() {
+        $ul.removeChild($ul.lastElementChild);
+
+        console.log(htmlCollection); // 실시간반영
+        console.log(nodeList); // 실시간미반영
+      }
     </script>
   </body>
 </html>
