@@ -7,9 +7,9 @@ import {
     DashboardOutlined,
     SettingOutlined,
     InfoOutlined,
-    FolderViewOutlined
+    FolderViewOutlined,
 } from '@ant-design/icons';
-import {Link, Route, Routes} from "react-router-dom";
+import {Link, Route, Routes, useLocation} from "react-router-dom";
 import RootPage from "./pages/RootPage.jsx";
 import TodoPage from "./pages/TodoPage.jsx";
 import ReviewPage from "./pages/ReviewPage.jsx";
@@ -25,7 +25,7 @@ const items = [
     {
         key: 'dashboard',
         icon: <DashboardOutlined/>,
-        label: <Link to={`/`}>Dashboard</Link>,
+        label: <Link to={`/`}>대시보드</Link>,
     },
     {
         key: 'todo',
@@ -34,7 +34,7 @@ const items = [
     },
     {
         key: 'review',
-        icon: <FolderViewOutlined />,
+        icon: <FolderViewOutlined/>,
         label: <Link to={`/review`}>리뷰</Link>,
     },
     {
@@ -57,6 +57,8 @@ const items = [
 const AppLayout = () => {
     const [collapsed, setCollapsed] = useState(false);
     const screens = useBreakpoint();
+    const location = useLocation();
+    const selectedKey = location.pathname;
 
     return (
         <Layout style={{minHeight: '100vh'}}>
@@ -68,12 +70,35 @@ const AppLayout = () => {
                 collapsedWidth="0"
                 onBreakpoint={(broken) => setCollapsed(broken)}
             >
-                <div style={{height: 32, margin: 16, background: 'rgba(255,255,255,0.2)'}}/>
+                <div style={{height: 45, margin: 16, background: 'rgba(255,255,255,0.2)'}}
+                     onClick={() => {
+                         if (!screens.md) {
+                             setCollapsed(true);
+                         }
+                     }}>
+                    <Link to={'/'}>
+                        <h1 style={{
+                            color: "white",
+                            textAlign: "center",
+                            fontSize: '1.6rem',
+                            lineHeight: '3rem'
+                        }}>관리자</h1>
+                    </Link>
+                </div>
                 <Menu
                     theme="dark"
                     mode="inline"
                     defaultSelectedKeys={['dashboard']}
+                    selectedKeys={[selectedKey]}
                     items={items}
+                    onClick={(e) => {
+                        // screens.md는 화면사이즈가 미디엄 이상일 때 treu값이 출력
+                        // screens.md 화면사이즈가 sx 스몰사이즐 때는 false값 출력
+                        // console.log('누름' + screens.md);
+                        if (!screens.md) {
+                            // setCollapsed(true);
+                        }
+                    }}
                 />
             </Sider>
 
@@ -103,12 +128,12 @@ const AppLayout = () => {
 
                 {/* 본문 콘텐츠 */}
                 <Routes>
-                    <Route path="/" element={<RootPage/>} />
-                    <Route path="/todo" element={<TodoPage/>} />
-                    <Route path="/review" element={<ReviewPage/>} />
-                    <Route path="/user/add" element={<UserAddPage/>} />
-                    <Route path="/user/list" element={<UserListPage/>} />
-                    <Route path="/user/login" element={<UserLoginPage/>} />
+                    <Route path="/" element={<RootPage/>}/>
+                    <Route path="/todo" element={<TodoPage/>}/>
+                    <Route path="/review" element={<ReviewPage/>}/>
+                    <Route path="/user/add" element={<UserAddPage/>}/>
+                    <Route path="/user/list" element={<UserListPage/>}/>
+                    <Route path="/user/login" element={<UserLoginPage/>}/>
                 </Routes>
 
                 {/* 하단 푸터 */}

@@ -6,18 +6,16 @@
     <title>Document</title>
   </head>
   <body>
-    <!-- beforebegin -->
     <ul id="fr">
-      <!-- afterbegin -->
       <li>Apple</li>
       <li>Banana</li>
       <li>Melon</li>
-      <!-- beforeend -->
     </ul>
-    <!-- afterend -->
     <script>
-      const $ul = document.getElementById("fr");
-      $ul.insertAdjacentHTML("afterend", "<div>test</div>");
+      const $li = document.createElement("li");
+      $li.appendChild(document.createTextNode("🥑"));
+      
+      document.getElementById("fr").appendChild($li);
     </script>
   </body>
 </html>

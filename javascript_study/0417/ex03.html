@@ -6,18 +6,25 @@
     <title>Document</title>
   </head>
   <body>
-    <!-- beforebegin -->
     <ul id="fr">
-      <!-- afterbegin -->
       <li>Apple</li>
       <li>Banana</li>
       <li>Melon</li>
-      <!-- beforeend -->
     </ul>
-    <!-- afterend -->
     <script>
       const $ul = document.getElementById("fr");
-      $ul.insertAdjacentHTML("afterend", "<div>test</div>");
+
+      const $frag = document.createDocumentFragment();
+
+      ["🍔", "🍟", "🌭"].forEach((item) => {
+        const $li = document.createElement("li");
+        const textnode = document.createTextNode(item);
+        $li.appendChild(textnode);
+
+        $frag.appendChild($li);
+      });
+
+      $ul.appendChild($frag);
     </script>
   </body>
 </html>
