@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <ul>
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Melon</li>
+      </ul>
+      <button onclick="addLi();">li추가</button>
+      <button onclick="delLi();">li삭제</button>
+    </div>
+
+    <script>
+      const htmlCollection = document.getElementsByTagName("li");
+      console.log(htmlCollection);
+
+      const nodeList = document.querySelectorAll("li");
+      console.log(nodeList);
+    </script>
+  </body>
+</html>
