@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 어트리뷰트 / dom프로퍼티  -->
+    <!-- value="열씸쟁이"는 초기값이고, 변경하면 현재값이 된다. -->
+    <input type="text" value="열씸쟁이" id="inputId" />
+    <ul>
+      <li>Apple</li>
+      <li>Banana</li>
+      <li>Orange</li>
+    </ul>
+    <script>
+      const { attributes } = document.getElementById("inputId");
+      console.log(attributes);
+
+      console.log(attributes.id.value);
+      console.log(attributes.type.value);
+      console.log(attributes.value.value);
+
+      document.getElementById("inputId").setAttribute("value", "71일차");
+      console.log(document.getElementById("inputId").getAttribute("value"));
+    </script>
+  </body>
+</html>
