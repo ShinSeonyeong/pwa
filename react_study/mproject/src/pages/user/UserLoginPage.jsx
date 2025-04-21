@@ -20,6 +20,10 @@ function UserLoginPage(props) {
             const isMatch = await bcrypt.compare(password, ret.data.password); // 비밀번호 비교
             if (isMatch) {
                 message.success('로그인 성공하였습니다.');
+                console.log(ret.data);
+                sessionStorage.setItem('name', ret.data.name);
+                sessionStorage.setItem('email', ret.data.email);
+                sessionStorage.setItem('age', ret.data.age);
                 navigate('/'); // 로그인 성공 시 메인 페이지로 이동
             } else {
                 message.error('비밀번호가 일치하지 않습니다.');

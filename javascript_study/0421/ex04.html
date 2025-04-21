@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul style="background-color: antiquewhite;">
+      <li>바나나</li>
+      <li>사과</li>
+      <li>수박</li>
+    </ul>
+    <button onclick="sayHi(event)">버튼</button>
+    <button id="button">onclick</button>
+    <script>
+        const $ul = document.getElementsByTagName('ul')[0];
+        console.log($ul.style.width);
+        console.log($ul.style.color);
+        console.log(window.getComputedStyle($ul).width);
+        console.log(window.getComputedStyle($ul).color);
+
+        function sayHi(name){
+            console.log(name);
+        }
+        
+        document.querySelector('#button').onclick = function (){
+            console.log('조금 더 새로운 방식');
+        }
+        
+        document.querySelector('#button').onclick = function (){
+            console.log('조금 더 새로운 방식 - 변경');
+        }
+        
+        document.querySelector('#button').addEventListener('click', function(){
+            console.log('가장 최신 방식');
+        })
+        
+        document.querySelector('#button').addEventListener('click', function(){
+            console.log('가장 최신 방식 - 변경된것, 가장 많이 사용');
+        })
+    </script>
+</html>

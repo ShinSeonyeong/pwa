@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button>추가삭제</button>
+    <script>
+      function func() {
+        console.log("함수");
+        // 이벤트 삭제 (false가 기본값, true 주면 삭제 실패)
+        $button.removeEventListener("click", func, false);
+      }
+      const $button = document.getElementsByTagName("button")[0];
+      $button.addEventListener("click", func); // 이벤트 추가
+    </script>
+  </body>
+</html>

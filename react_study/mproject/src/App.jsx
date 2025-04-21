@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Layout, Menu, Button, Grid, Row, Col, Card} from 'antd';
 import {
     MenuFoldOutlined,
@@ -16,6 +16,7 @@ import ReviewPage from "./pages/ReviewPage.jsx";
 import UserAddPage from "./pages/user/UserAddPage.jsx";
 import UserListPage from "./pages/user/UserListPage.jsx";
 import UserLoginPage from "./pages/user/UserLoginPage.jsx";
+import Logout from "./components/logout.jsx";
 
 const {Header, Sider, Content, Footer} = Layout;
 const {useBreakpoint} = Grid;
@@ -59,6 +60,18 @@ const AppLayout = () => {
     const screens = useBreakpoint();
     const location = useLocation();
     const selectedKey = location.pathname;
+    const [name, setName] = useState('');
+
+    useEffect(() => {
+        // 로그인 되어있는지 페이지 변경할 때 항상 확인해라.
+        const sessionName = sessionStorage.getItem('name');
+        if (sessionName) {
+            console.log(sessionName);
+            setName(sessionName);
+        } else {
+            setName('');
+        }
+    }, [selectedKey]);
 
     return (
         <Layout style={{minHeight: '100vh'}}>
@@ -122,7 +135,21 @@ const AppLayout = () => {
                         />
                     )}
                     <div style={{fontSize: '1.1rem', fontWeight: 'bold'}}>
-                        <Link to={'/user/login'}>로그인</Link>
+                        <span style={{marginRight: '2rem'}}>{name && `${name}님 환영합니다~`}</span>
+
+                        {/*세션스토리지에 값이 있으면 로그아웃 출력 / 없으면 로그인 출력*/}
+                        <Button color="primary" variant="solid">
+                            {
+                                name ?
+                                    (<Logout></Logout>)
+                                    :
+                                    (<Link to={'/user/login'}>로그인</Link>)
+
+                                // sessionStorage.getItem('name') ?
+                                //     (<Link to={'/user/login'}>로그아웃</Link>) :
+                                //     (<Link to={'/user/login'}>로그인</Link>)
+                            }
+                        </Button>
                     </div>
                 </Header>
 
