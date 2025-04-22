@@ -45,7 +45,6 @@ const items = [
         children: [
             {key: 'users-list', label: <Link to={'/user/list'}>사용자목록</Link>},
             {key: 'users-add', label: <Link to={'/user/add'}>사용자추가</Link>},
-            {key: 'users-delete', label: '사용자 삭제'},
         ],
     },
     {
@@ -135,7 +134,7 @@ const AppLayout = () => {
                         />
                     )}
                     <div style={{fontSize: '1.1rem', fontWeight: 'bold'}}>
-                        <span style={{marginRight: '2rem'}}>{name && `${name}님 환영합니다~`}</span>
+                        <span style={{marginRight: '2rem'}}>{name && `${name}님 환영합니다😊`}</span>
 
                         {/*세션스토리지에 값이 있으면 로그아웃 출력 / 없으면 로그인 출력*/}
                         <Button color="primary" variant="solid">
