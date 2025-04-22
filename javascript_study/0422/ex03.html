@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: rgb(183, 221, 192);
+      }
+      p {
+        background-color: rgb(202, 175, 230);
+      }
+    </style>
+  </head>
+  <body>
+    <p>안녕하세요. p문단 태그입니다. <button>버튼</button></p>
+    <script>
+      document.querySelector("body").addEventListener("click", function (e) {
+        console.log("body event");
+        console.log(e.currentTarget);
+        console.log(e.target);
+      }); //버블링
+      document.querySelector("p").addEventListener("click",function (e) {
+          console.log("p event");
+          console.log(e.currentTarget);
+          console.log(e.target);
+        },true); //캡쳐링
+      document.querySelector("button").addEventListener("click", function (e) {
+        console.log("button event");
+        console.log(e.currentTarget);
+        console.log(e.target);
+      }); //버블링
+    </script>
+  </body>
+</html>
