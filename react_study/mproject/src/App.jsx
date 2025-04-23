@@ -11,12 +11,14 @@ import {
 } from '@ant-design/icons';
 import {Link, Route, Routes, useLocation} from "react-router-dom";
 import RootPage from "./pages/RootPage.jsx";
-import TodoPage from "./pages/TodoPage.jsx";
+import TodoPage from "./pages/todo/TodoPage.jsx";
 import ReviewPage from "./pages/ReviewPage.jsx";
 import UserAddPage from "./pages/user/UserAddPage.jsx";
 import UserListPage from "./pages/user/UserListPage.jsx";
 import UserLoginPage from "./pages/user/UserLoginPage.jsx";
 import Logout from "./components/logout.jsx";
+import TodoListPage from "./pages/todo/TodoListPage.jsx";
+import TodoAddPage from "./pages/todo/TodoAddPage.jsx";
 
 const {Header, Sider, Content, Footer} = Layout;
 const {useBreakpoint} = Grid;
@@ -32,6 +34,10 @@ const items = [
         key: 'todo',
         icon: <InfoOutlined/>,
         label: <Link to={`/todo`}>할일</Link>,
+        children: [
+            {key: '/todo/list', label: <Link to={'/todo/list'}>TodoList</Link>},
+            {key: '/todo/add', label: <Link to={'/todo/add'}>+Todo</Link>},
+        ],
     },
     {
         key: 'review',
@@ -43,8 +49,8 @@ const items = [
         icon: <UserOutlined/>,
         label: '사용자 관리',
         children: [
-            {key: 'users-list', label: <Link to={'/user/list'}>사용자목록</Link>},
-            {key: 'users-add', label: <Link to={'/user/add'}>사용자추가</Link>},
+            {key: 'users/list', label: <Link to={'/user/list'}>사용자목록</Link>},
+            {key: 'users/add', label: <Link to={'/user/add'}>사용자추가</Link>},
         ],
     },
     {
@@ -65,7 +71,7 @@ const AppLayout = () => {
         // 로그인 되어있는지 페이지 변경할 때 항상 확인해라.
         const sessionName = sessionStorage.getItem('name');
         if (sessionName) {
-            console.log(sessionName);
+            // console.log(sessionName);
             setName(sessionName);
         } else {
             setName('');
@@ -160,9 +166,13 @@ const AppLayout = () => {
                     <Route path="/user/add" element={<UserAddPage/>}/>
                     <Route path="/user/list" element={<UserListPage/>}/>
                     <Route path="/user/login" element={<UserLoginPage/>}/>
+                    <Route path="/todo" element={<TodoPage/>}>
+                        <Route path="List" element={<TodoListPage/>}></Route>
+                        <Route path="add" element={<TodoAddPage/>}></Route>
+                    </Route>
                 </Routes>
 
-                {/* 하단 푸터 */}
+                {/* 하단 Footer */}
                 <Footer style={{textAlign: 'center'}}>
                     2025.04.14 made by ssy
                 </Footer>

@@ -6,8 +6,16 @@ export const deleteUserByIds = async (ids) => {
     return res;
 }
 
+export const updateUserById = async (id, values) => {
+    const res = await supabase.from('members').update(values).eq('id', id);
+    return res;
+}
+
 export const getUsers = async () => {
-    const users = await supabase.from('members').select();
+    const users = await supabase
+        .from('members')
+        .select()
+        .order('id', {ascending: false});
     console.log(users);
     return users;
 }

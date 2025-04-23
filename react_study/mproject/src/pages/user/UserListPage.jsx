@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Card, Form, Input, Layout, message, Modal, notification, Popconfirm, Table} from "antd";
-import {deleteUserByIds, getUsers} from "../../database/userManager.js";
+import {deleteUserByIds, getUsers, updateUserById} from "../../database/userManager.js";
 
 const {Content} = Layout;
 
@@ -62,8 +62,24 @@ function UserListPage(props) {
     }
 
     async function handleModalOk() {
-        // message.info('ok 눌렀음');
+        const values = form.getFieldsValue();
+        // message.info('눌렀음-test');
+        // message.info(findUser.id);
+        // console.log(values);
+
+        const {error} = await updateUserById(findUser.id, values);
+        if (error) {
+            if (error.code === '22P02') {
+                message.error('나이는 숫자로 입력해주세요..');
+                return;
+            } else {
+                message.error('수정 중 오류가 발생했습니다.');
+                return;
+            }
+        }
+        message.success('성공적으로 수정하였습니다.');
         setShowModal(false);
+        setSelectedRowKeys([]);
     }
 
     useEffect(() => {
@@ -92,7 +108,7 @@ function UserListPage(props) {
                         <Form.Item label="이름" name="name" rules={[{required: true}]}>
                             <input></input>
                         </Form.Item>
-                        <Form.Item label="email" name="name" rules={[{required: true, type: 'email'}]}>
+                        <Form.Item label="email" name="email" rules={[{required: true, type: 'email'}]}>
                             <input></input>
                         </Form.Item>
                         <Form.Item label="나이" name="age" rules={[{required: true}]}>
