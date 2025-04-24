@@ -80,6 +80,7 @@ function UserListPage(props) {
         message.success('성공적으로 수정하였습니다.');
         setShowModal(false);
         setSelectedRowKeys([]);
+
     }
 
     useEffect(() => {
