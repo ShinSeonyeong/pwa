@@ -11,14 +11,16 @@ import {
 } from '@ant-design/icons';
 import {Link, Route, Routes, useLocation} from "react-router-dom";
 import RootPage from "./pages/RootPage.jsx";
-import TodoPage from "./pages/todo/TodoPage.jsx";
-import ReviewPage from "./pages/ReviewPage.jsx";
+import Logout from "./components/logout.jsx";
 import UserAddPage from "./pages/user/UserAddPage.jsx";
 import UserListPage from "./pages/user/UserListPage.jsx";
 import UserLoginPage from "./pages/user/UserLoginPage.jsx";
-import Logout from "./components/logout.jsx";
+import TodoPage from "./pages/todo/TodoPage.jsx";
 import TodoListPage from "./pages/todo/TodoListPage.jsx";
 import TodoAddPage from "./pages/todo/TodoAddPage.jsx";
+import ReviewPage from "./pages/review/ReviewPage.jsx";
+import ReviewListPage from "./pages/review/ReviewListPage.jsx";
+import ReviewAddPage from "./pages/review/ReviewAddPage.jsx";
 
 const {Header, Sider, Content, Footer} = Layout;
 const {useBreakpoint} = Grid;
@@ -42,7 +44,11 @@ const items = [
     {
         key: 'review',
         icon: <FolderViewOutlined/>,
-        label: <Link to={`/review`}>리뷰</Link>,
+        label: '리뷰',
+        children: [
+            {key: '/review/list', label: <Link to={'/review/list'}>ReviewList</Link>},
+            {key: '/review/add', label: <Link to={'/review/add'}>+Review</Link>},
+        ],
     },
     {
         key: 'users',
@@ -162,13 +168,16 @@ const AppLayout = () => {
                 <Routes>
                     <Route path="/" element={<RootPage/>}/>
                     <Route path="/todo" element={<TodoPage/>}/>
-                    <Route path="/review" element={<ReviewPage/>}/>
                     <Route path="/user/add" element={<UserAddPage/>}/>
                     <Route path="/user/list" element={<UserListPage/>}/>
                     <Route path="/user/login" element={<UserLoginPage/>}/>
                     <Route path="/todo" element={<TodoPage/>}>
                         <Route path="List" element={<TodoListPage/>}></Route>
                         <Route path="add" element={<TodoAddPage/>}></Route>
+                    </Route>
+                    <Route path="/review" element={<ReviewPage/>}>
+                        <Route path="List" element={<ReviewListPage/>}></Route>
+                        <Route path="add" element={<ReviewAddPage/>}></Route>
                     </Route>
                 </Routes>
 
