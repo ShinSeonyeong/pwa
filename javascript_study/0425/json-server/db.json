@@ -1,24 +1,26 @@
 {
   "todos": [
     {
-      "id": "2",
-      "todo": "동리 산책",
-      "completed": false
+      "todo": "이것도 되는가?",
+      "completed": true,
+      "id": "7786"
     },
     {
-      "id": "9e32",
-      "todo": "가나다라 마바사 아자차카 타파하",
-      "completed": false
-    },
-    {
-      "todo": "수정했읍니다.",
+      "todo": "이것도 되sdsdfsdfsd는가?",
       "completed": false,
-      "id": "97ce"
+      "id": "2042"
+    }
+  ],
+  "users": [
+    {
+      "id": "2",
+      "name": "오애순",
+      "age": 20
     },
     {
-      "id": "7786",
-      "todo": "스쿼트 80kg 1RM",
-      "completed": true
+      "name": "금명이",
+      "age": 36,
+      "id": "3"
     }
   ]
 }

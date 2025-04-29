@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Table, Tag} from "antd";
+import {Button, message, Table, Tag} from "antd";
 import {useNavigate} from "react-router-dom";
 
 function TodoListPage(props) {
@@ -8,11 +8,7 @@ function TodoListPage(props) {
         {"id": 2, "todo": "Do something nice", "completed": true, "userId": 152}
     ]);
     const navigate = useNavigate();
-
-    useEffect(() => {
-        // console.log(todos);
-    }, []);
-
+    const [selectedRowkeys, setSelectedRowKeys] = useState([]);
 
     const columns = [
         {
@@ -46,6 +42,13 @@ function TodoListPage(props) {
         }
     ];
 
+    const rowSelection = {
+        selectedRowkeys: selectedRowkeys,
+        onChange: (newselectedRowKeys) => {
+            setSelectedRowKeys(newselectedRowKeys)
+        },
+    }
+
     const LoadData = async () => {
         fetch('https://6809e0631f1a52874cde2b73.mockapi.io/todos')
             .then(res => res.json())
@@ -61,12 +64,17 @@ function TodoListPage(props) {
             <div style={{display: "flex", gap: "0.5rem"}}>
                 <Button type="primary" style={{margin: '1rem 0'}} onClick={LoadData}>조회</Button>
                 <Button type="primary" style={{margin: '1rem 0'}} onClick={() => {
-                    navigate('/todo/modify/3')
+                    console.log(selectedRowkeys);
+                    if (selectedRowkeys.length !== 1) {
+                        message.warning('한개의 행만 선택하세요.');
+                        return;
+                    }
+                    navigate(`/todo/modify/${selectedRowkeys[0]}`);
                 }}>수정</Button>
                 <Button type="primary" style={{margin: '1rem 0'}} onClick={() => {
                 }}>삭제</Button>
             </div>
-            <Table dataSource={todos} rowKey="id" columns={columns}></Table>
+            <Table rowSelection={rowSelection} dataSource={todos} rowKey="id" columns={columns}></Table>
             {
                 todos.map(todo => {
                     return (<h1 key={todo.id}>{todo.todo}</h1>)

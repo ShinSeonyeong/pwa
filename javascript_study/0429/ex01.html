@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="pp"></p>
+    <script type="module">
+      let test = "여기서부터 통신이 되나?";
+      const $pp = document.getElementById("pp");
+      const get = (url) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.send();
+
+        xhr.onload = () => {
+          test = "성공적으로 통신";
+          console.log(xhr);
+          if (xhr.status === 200) {
+            const result = xhr.response.replaceAll(",", ",<br />");
+            $pp.innerHTML = result;
+            return result;
+            // $pp.textContent = JSON.stringify(JSON.parse(xhr.response));
+          }
+        };
+      };
+
+      const ret = get("https://6809e0631f1a52874cde2b73.mockapi.io/todos/1");
+      console.log("test=", test);
+      console.log("ret=", ret);
+    </script>
+  </body>
+</html>

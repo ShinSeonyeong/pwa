@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.9.0/axios.min.js"
+      integrity="sha512-FPlUpimug7gt7Hn7swE8N2pHw/+oQMq/+R/hH/2hZ43VOQ+Kjh25rQzuLyPz7aUWKlRpI7wXbY6+U3oFPGjPOA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <hr />
+    <button id="GET">GET</button>
+    <hr />
+
+    <input type="text" id="todo" />
+    <button id="POST">POST</button>
+    <hr />
+
+    <button id="PUT">PUT(일정수정)</button>
+
+    <hr />
+    <button id="PATCH">PATCH (완료여부체크)</button>
+    <hr />
+
+    <button id="DELETE">DELETE</button>
+    <hr />
+
+    <h1>ToDo</h1>
+    <div id="result"></div>
+
+    <script>
+      const $div = document.getElementById("result");
+      let id;
+
+      $div.addEventListener("click", ({ target }) => {
+        console.log(target.tagName);
+        if (target.tagName == "INPUT") {
+          id = target.value;
+          console.log(id);
+        }
+      });
+
+      document.getElementById("GET").addEventListener("click", function () {
+        $div.innerHTML = "";
+        axios.get("http://192.168.0.42:5000/todos").then((data) => {
+          console.log(data);
+          data.data.forEach((item) => {
+            const $subDiv = document.createElement("div");
+
+            const $checkbox = document.createElement("input");
+            $checkbox.type = "checkbox";
+            $checkbox.value = item.id;
+
+            const $h1 = document.createElement("h1");
+            $h1.textContent = item.todo;
+
+            $subDiv.appendChild($checkbox);
+            $subDiv.appendChild($h1);
+
+            $div.appendChild($subDiv);
+          });
+        });
+      });
+
+      document.getElementById("POST").addEventListener("click", function () {
+        const todo = document.getElementById("todo").value;
+        axios.post("http://192.168.0.42:5000/todos", {
+          todo,
+          completed: false,
+        });
+      });
+
+      document.getElementById("PUT").addEventListener("click", function () {
+        axios.put(`http://192.168.0.42:5000/todos/${id}`, {
+          completed: true,
+        });
+      });
+
+      document.getElementById("PATCH").addEventListener("click", function () {
+        const completed = data.data.completed;
+        console.log(completed);
+        // if (completed === false) {
+        //   axios.patch(`http://192.168.0.42:5000/todos/${id}`, {
+        //     completed: true,
+        //   });
+        // } else {
+        //   axios.patch(`http://192.168.0.42:5000/todos/${id}`, {
+        //     completed: false,
+        //   });
+        // }
+      });
+
+      document.getElementById("DELETE").addEventListener("click", function () {
+        axios.delete(`http://192.168.0.42:5000/todos/${id}`);
+      });
+    </script>
+  </body>
+</html>
