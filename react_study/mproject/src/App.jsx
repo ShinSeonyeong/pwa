@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {lazy, Suspense, useEffect, useState} from 'react';
 import {Layout, Menu, Button, Grid, Row, Col, Card} from 'antd';
 import {
     MenuFoldOutlined,
@@ -16,7 +16,7 @@ import UserAddPage from "./pages/user/UserAddPage.jsx";
 import UserListPage from "./pages/user/UserListPage.jsx";
 import UserLoginPage from "./pages/user/UserLoginPage.jsx";
 import TodoPage from "./pages/todo/TodoPage.jsx";
-import TodoListPage from "./pages/todo/TodoListPage.jsx";
+// import TodoListPage from "./pages/todo/TodoListPage.jsx";
 import TodoAddPage from "./pages/todo/TodoAddPage.jsx";
 import TodoModifyPage from "./pages/todo/TodoModifyPage.jsx";
 
@@ -68,12 +68,16 @@ const items = [
     },
 ];
 
+const TodoListPage = lazy(() => import('./pages/todo/TodoListPage'));
+
 const AppLayout = () => {
     const [collapsed, setCollapsed] = useState(false);
     const screens = useBreakpoint();
     const location = useLocation();
     const selectedKey = location.pathname;
     const [name, setName] = useState('');
+
+
 
     useEffect(() => {
         // 로그인 되어있는지 페이지 변경할 때 항상 확인해라.
@@ -167,22 +171,26 @@ const AppLayout = () => {
                 </Header>
 
                 {/* 본문 콘텐츠 */}
-                <Routes>
-                    <Route path="/" element={<RootPage/>}/>
-                    <Route path="/todo" element={<TodoPage/>}/>
-                    <Route path="/user/add" element={<UserAddPage/>}/>
-                    <Route path="/user/list" element={<UserListPage/>}/>
-                    <Route path="/user/login" element={<UserLoginPage/>}/>
-                    <Route path="/todo" element={<TodoPage/>}>
-                        <Route path="List" element={<TodoListPage/>}></Route>
-                        <Route path="add" element={<TodoAddPage/>}></Route>
-                        <Route path="modify/:id" element={<TodoModifyPage/>}></Route>
-                    </Route>
-                    <Route path="/review" element={<ReviewPage/>}>
-                        <Route path="List" element={<ReviewListPage/>}></Route>
-                        <Route path="add" element={<ReviewAddPage/>}></Route>
-                    </Route>
-                </Routes>
+                <Content style={{margin: '1rem'}}>
+                <Suspense fallback={<div>Loading...</div>}>
+                    <Routes>
+                        <Route path="/" element={<RootPage/>}/>
+                        <Route path="/todo" element={<TodoPage/>}/>
+                        <Route path="/user/add" element={<UserAddPage/>}/>
+                        <Route path="/user/list" element={<UserListPage/>}/>
+                        <Route path="/user/login" element={<UserLoginPage/>}/>
+                        <Route path="/todo" element={<TodoPage/>}>
+                            <Route path="List" element={<TodoListPage/>}></Route>
+                            <Route path="add" element={<TodoAddPage/>}></Route>
+                            <Route path="modify/:id" element={<TodoModifyPage/>}></Route>
+                        </Route>
+                        <Route path="/review" element={<ReviewPage/>}>
+                            <Route path="List" element={<ReviewListPage/>}></Route>
+                            <Route path="add" element={<ReviewAddPage/>}></Route>
+                        </Route>
+                    </Routes>
+                </Suspense>
+                </Content>
 
                 {/* 하단 Footer */}
                 <Footer style={{textAlign: 'center'}}>
