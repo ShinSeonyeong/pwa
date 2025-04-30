@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let result = "result";
+      const getPromise = (url, fn) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.send();
+
+        xhr.onload = () => {
+          console.log(xhr);
+          result = xhr.response;
+          console.log(result);
+          fn(result);
+        };
+      };
+
+      getPromise(
+        "https://6809e0631f1a52874cde2b73.mockapi.io/todos/1",
+        console.log
+      );
+      console.log("result", result);
+    </script>
+  </body>
+</html>

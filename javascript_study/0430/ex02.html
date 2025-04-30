@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const getPromise = (url) => {
+        return new Promise((resolve, reject) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", url);
+          xhr.send();
+
+          xhr.onload = () => {
+            if (xhr.status === 200)
+              resolve(xhr.response); // 응답되는 코드를 res로 보냄.
+            else reject("통신실패" + xhr.status); // 통신실패면 catch문 통해서 들어오게 됨
+          };
+        });
+      };
+
+      getPromise("https://6809e0631f1a52874cde2b73.mockapi.io/todos/")
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    </script>
+  </body>
+</html>
