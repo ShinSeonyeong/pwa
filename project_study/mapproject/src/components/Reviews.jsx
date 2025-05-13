@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { fetchReviews } from "../../api/supadb";
-import { UserOutlined } from "@ant-design/icons";
+import { EnvironmentFilled, UserOutlined } from "@ant-design/icons";
+import { Card, Typography, Form, Input, Button, message, Rate } from "antd";
+import { useForm } from "antd/es/form/Form";
+
+const { Title, Text } = Typography;
+const { TextArea } = Input;
 
 export const Reviews = ({ city }) => {
   if (!city) {
@@ -13,6 +18,7 @@ export const Reviews = ({ city }) => {
   //   setCity(propCity);
   // }, [propCity]);
   const [reviews, setReviews] = useState([]);
+  const [form] = Form.useForm();
 
   useEffect(() => {
     fetchReviews(city.id)
@@ -24,6 +30,11 @@ export const Reviews = ({ city }) => {
       });
   }, [city]);
 
+  const handleSubmit = () => {
+    console.log("submit");
+    console.log(values);
+  };
+
   return (
     <div>
       <h1> Review {city.name}</h1>
@@ -34,12 +45,51 @@ export const Reviews = ({ city }) => {
           <div key={review.id}>
             <p>{review.comment}</p>
             <p>
-              <UserOutlined /> 작성자: {review.user_name}
+              <UserOutlined />
+              작성자: {review.user_name}
             </p>
             <p>작성일: {new Date(review.created_at).toLocaleDateString()}</p>
           </div>
         );
       })}
+      <Card>
+        <Title level={3}>
+          <EnvironmentFilled />
+          리뷰작성
+        </Title>
+        <Form form={form} onFinish={handleSubmit} layout="vertical">
+          <Form.Item
+            name="useName"
+            label="이름"
+            rules={[{ required: true, message: "이름을 입력하세요." }]}
+          >
+            <Input prefix={<UserOutlined />} placeholder="이름을 입력하세요." />
+          </Form.Item>
+          <Form.Item
+            name="rating"
+            label="평점"
+            rules={[{ required: true, message: "평점을 입력하세요." }]}
+          >
+            <Rate></Rate>
+          </Form.Item>
+          <Form.Item
+            name="comment"
+            label="리뷰내용"
+            rules={[{ required: true, message: "리뷰내용을 입력하세요." }]}
+          >
+            <TextArea rows={4} placeholder="리뷰내용을 입력하세요." />
+            <Rate></Rate>
+          </Form.Item>
+          <Form.Item
+            type="primary"
+            htmlTupe="submit"
+            block
+            rules={[{ required: true, message: "리뷰내용을 입력하세요." }]}
+          >
+            <TextArea rows={4} placeholder="리뷰내용을 입력하세요." />
+          </Form.Item>
+        </Form>
+      </Card>
     </div>
   );
 };
