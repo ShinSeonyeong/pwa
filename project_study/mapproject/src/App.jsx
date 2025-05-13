@@ -105,13 +105,14 @@ function App() {
             key={city.id}
             position={{ lat: city.latitude, lng: city.longitude }}
             onClick={() => {
-              clickAqi(city);
-              setCity(city);
+              clickAqi(city); // 미세먼지 데이터 정보 가져오기
+              setCity(city); // 해당좌표 클릭해서 하위 컴포넌트인 Reviews에 city pros로 정보 넘거주는 역할
             }}
           ></MapMarker>
         ))}
       </Map>
-      <Reviews cityId={city}></Reviews>
+      {/* city 데이터 변경 시 자동으로 하위컴포넌트 조절 */}
+      <Reviews city={city}></Reviews>
       {/* {AirTable({...aqiInfo})} 이 방식과 <AirTable {...aqiInfo}></AirTable> 방식이 동일하다 */}
       <AirTable {...aqiInfo}></AirTable>
     </>
