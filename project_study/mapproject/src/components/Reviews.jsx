@@ -17,7 +17,7 @@ export const Reviews = ({ city }) => {
   // useEffect(() => {
   //   setCity(propCity);
   // }, [propCity]);
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState(null);
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export const Reviews = ({ city }) => {
       });
   }, [city]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (values) => {
     console.log("submit");
     console.log(values);
   };
@@ -39,9 +39,7 @@ export const Reviews = ({ city }) => {
     <div>
       <h1> Review {city.name}</h1>
       <h2> 미세먼지 {city.aqi}</h2>
-      {reviews.map((review) => {
-        console.log(review);
-        return (
+      {reviews && reviews.map((review) => (
           <div key={review.id}>
             <p>{review.comment}</p>
             <p>
@@ -50,8 +48,8 @@ export const Reviews = ({ city }) => {
             </p>
             <p>작성일: {new Date(review.created_at).toLocaleDateString()}</p>
           </div>
-        );
-      })}
+        )
+      )}
       <Card>
         <Title level={3}>
           <EnvironmentFilled />
@@ -59,7 +57,7 @@ export const Reviews = ({ city }) => {
         </Title>
         <Form form={form} onFinish={handleSubmit} layout="vertical">
           <Form.Item
-            name="useName"
+            name="userName"
             label="이름"
             rules={[{ required: true, message: "이름을 입력하세요." }]}
           >
@@ -68,7 +66,7 @@ export const Reviews = ({ city }) => {
           <Form.Item
             name="rating"
             label="평점"
-            rules={[{ required: true, message: "평점을 입력하세요." }]}
+            rules={[{ required: true, message: "평점을 선택해주세요." }]}
           >
             <Rate></Rate>
           </Form.Item>
@@ -78,15 +76,9 @@ export const Reviews = ({ city }) => {
             rules={[{ required: true, message: "리뷰내용을 입력하세요." }]}
           >
             <TextArea rows={4} placeholder="리뷰내용을 입력하세요." />
-            <Rate></Rate>
           </Form.Item>
-          <Form.Item
-            type="primary"
-            htmlTupe="submit"
-            block
-            rules={[{ required: true, message: "리뷰내용을 입력하세요." }]}
-          >
-            <TextArea rows={4} placeholder="리뷰내용을 입력하세요." />
+          <Form.Item>          
+            <Button type="primary" htmlType="submit">리뷰작성</Button>
           </Form.Item>
         </Form>
       </Card>
