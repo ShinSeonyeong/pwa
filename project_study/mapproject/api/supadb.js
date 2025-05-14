@@ -7,7 +7,10 @@ const supabase = new SupabaseClient(
 
 export const fetchCities = async () => {
   try {
-    const { data } = await supabase.from("cities").select("*");
+    const { data } = await supabase
+      .from("cities")
+      .select("*")
+      .order("category");
     return data;
   } catch (e) {
     return [];
@@ -23,5 +26,25 @@ export const fetchReviews = async (cityId) => {
     return data;
   } catch (e) {
     return [];
+  }
+};
+
+export const postReview = async (values) => {
+  console.log(values);
+  try {
+    const { data, error } = await supabase.from("reviews").insert([
+      {
+        city_id: values.city_id,
+        user_name: values.user_name,
+        rating: values.rating,
+        comment: values.comment,
+        air_quality_index: values.air_quality_index,
+      },
+    ]);
+    if (error) throw error;
+    return "success";
+  } catch (e) {
+    console.log(e);
+    return "fail";
   }
 };
