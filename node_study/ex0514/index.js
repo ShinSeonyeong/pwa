@@ -19,7 +19,7 @@ http
                 conn.release(); // pool 반환
                 console.log(result);
                 res.writeHead(200, {"Content-Type": "application/json; charset=utf-8"});
-                return res.end(JSON.stringify(result[0])); // 결과를 JSON으로 변환하여 전송함.
+                return res.end(JSON.stringify(result)); // 결과를 JSON으로 변환하여 전송함.
             } else if (req.url === "/join" && req.method === "POST") {
                 // 한글이 들어오는 것 맞추기 위해 utf-8로 인코딩
                 req.setEncoding("utf8");
