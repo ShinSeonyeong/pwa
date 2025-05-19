@@ -43,10 +43,11 @@ http
 
                     console.log(result); // 결과 출력
                 });
-
+                // writeHead 메서드는 응답 헤더를 설정하는 메서드
                 res.writeHead(201, {
                     "Content-Type": "application/json; charset=utf-8",
                 });
+                // res.end() 메서드는 응답 본문을 설정하는 메서드
                 return res.end(JSON.stringify({message: '회원가입 성공'}));
             } else if (req.url === "/login") {
                 res.writeHead(200, {"Content-Type": "text/plain; charset=utf-8"});
