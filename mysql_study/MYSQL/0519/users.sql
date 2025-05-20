@@ -1,4 +1,4 @@
-INSERT INTO users (id, PASSWORD) VALUES ('id_testa', 'id_testa');
+usersINSERT INTO users (id, PASSWORD) VALUES ('id_testa', 'id_testa');
 
 SELECT * FROM users;
 
