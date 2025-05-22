@@ -10,8 +10,9 @@ const app = express(); // app express 객체생성
 
 // app.use(morgan("combined")); // dev: 개발단계에서 사용, combined: 실제 운영배포에서 사용
 
-// publick 폴더에 해당하는 파일이 있으면 클라이언트한테 준다.
+// public 폴더에 해당하는 파일이 있으면 클라이언트한테 준다.
 // "/": 클라이언트가 접속하는 방법 설정
+// 만약 "/aaa"로 되어 있으면 http://localhost:8080/aaa/pepe04.jpg 이렇게 요청해야 함.
 app.use("/", express.static(path.join(__dirname, "public")));
 
 // req.body의 파라메타를 받아줌. {id:"aaa@naver.com"} 이런식으로 받아옴.
@@ -21,8 +22,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 app.use((req, res, next) => {
-  //   console.log(req.body);
-  //   console.log(req.query);
+  //   console.log(req.body); // req.body => { name: "홍길동" }
+  //   console.log(req.query); // req.query => localhost:8080?aa=10&b=20
   console.log("모든 요청은 이곳을 거친다.");
   next(); // 다음 미들웨어로 넘어간다.
 });
