@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const cors = require("cors");
 const pool = require("./db.js");
 const express = require("express"); // npm i로 설치한 모듈, 노드모듈에 있는 express 가지고 오는 것
 const path = require("path"); // 경로 관리 모듈
@@ -7,6 +8,8 @@ const morgan = require("morgan"); // 기록 남기는 모듈
 const cookieParser = require("cookie-parser");
 
 const app = express(); // app express 객체생성
+
+app.use(cors());
 
 // app.use(morgan("combined")); // dev: 개발단계에서 사용, combined: 실제 운영배포에서 사용
 
@@ -62,6 +65,17 @@ app.get(
     console.log("다음 미들웨어로 넘어간다.");
     // res.json('json 두 번 쓰면 안된다.')
   }
+);
+
+app.get(
+  "/users",
+  async (req, res, next) => {
+    const conn = await pool.getConnection(); // 연결 객체 가져오기
+    const result = await conn.execute("SELECT * FROM users limit 3");
+    conn.release(); // 연결 객체 반환
+    res.status(200).json(result[0]); // 클라이언트에게 보내기
+    // res.status(200).json({aa:10, bb:20}); // 클라이언트에게 보내기
+  },
 );
 
 // POST: 데이터 생성(insert)
