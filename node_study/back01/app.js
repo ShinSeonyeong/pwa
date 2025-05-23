@@ -1,7 +1,9 @@
 require("dotenv").config();
 
 const cors = require("cors");
+
 const pool = require("./db.js");
+const { supabase } = require("./supadb.js");
 const express = require("express"); // npm i로 설치한 모듈, 노드모듈에 있는 express 가지고 오는 것
 const path = require("path"); // 경로 관리 모듈
 const morgan = require("morgan"); // 기록 남기는 모듈
@@ -29,6 +31,15 @@ app.use((req, res, next) => {
   //   console.log(req.query); // req.query => localhost:8080?aa=10&b=20
   console.log("모든 요청은 이곳을 거친다.");
   next(); // 다음 미들웨어로 넘어간다.
+});
+
+// supabase 테이블에 있는 데이터 가져오기
+app.get("/supauser", async (req, res, next) => {
+  const { data, error } = await supabase.from("user").select();
+  console.log("data", data);
+  console.log("error", error);
+
+  res.json({ message: "오늘도 화이팅! ", data });
 });
 
 app.get("/setCoo", (req, res, next) => {
@@ -67,22 +78,19 @@ app.get(
   }
 );
 
-app.get(
-  "/users",
-  async (req, res, next) => {
-    const conn = await pool.getConnection(); // 연결 객체 가져오기
-    const result = await conn.execute("SELECT * FROM users limit 3");
-    conn.release(); // 연결 객체 반환
-    res.status(200).json(result[0]); // 클라이언트에게 보내기
-    // res.status(200).json({aa:10, bb:20}); // 클라이언트에게 보내기
-  },
-);
+app.get("/users", async (req, res, next) => {
+  const conn = await pool.getConnection(); // 연결 객체 가져오기
+  const result = await conn.execute("SELECT * FROM users limit 3");
+  conn.release(); // 연결 객체 반환
+  res.status(200).json(result[0]); // 클라이언트에게 보내기
+  // res.status(200).json({aa:10, bb:20}); // 클라이언트에게 보내기
+});
 
 // POST: 데이터 생성(insert)
 app.post("/", async (req, res) => {
   const conn = await pool.getConnection(); // 연결 객체 가져오기
   const result = await conn.execute(`insert into users (id, password) 
-                                    values ('${req.body.name}', '${req.body.age}')`);
+                                    values ('${req.body.id}', '${req.body.password}')`);
   conn.release(); // 연결 객체 반환
   res.send(result);
 });
@@ -105,7 +113,11 @@ app.put("/", async (req, res) => {
 });
 
 // DELETE: 데이터 삭제
-app.delete("/", (req, res) => {
+app.delete("/", async (req, res) => {
+  const conn = await pool.getConnection();
+  const result = await conn.execute(
+    `delete from users where idx='${req.body.idx}'`
+  );
   //   throw new Error("강제 에러 발생"); // 에러 발생
   res.send("Hello Delete!");
 });
