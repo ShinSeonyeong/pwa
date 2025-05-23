@@ -2,6 +2,9 @@ import './App.css'
 import axios from "axios";
 import {useState} from "react";
 import dbusers from './users.json'
+import AirComponent from "./components/AirComponent.jsx";
+
+const backUrl = import.meta.env.VITE_BACK_URL
 
 function App() {
 
@@ -9,13 +12,15 @@ function App() {
   const [supaUsers, setSupaUsers] = useState(dbusers);
 
   const getUsers = async (event) => {
-    const result = await axios.get("http://localhost:8080") // cloudType: https://port-0-pwa01-manaeiwh8fe5b082.sel4.cloudtype.app/
+    const result = await axios.get(backUrl) // cloudType: https://port-0-pwa01-manaeiwh8fe5b082.sel4.cloudtype.app/
     const {data, status} = result;
+    console.log(data);
+    console.log(status);
     setUsers(data);
   };
 
   const getSupaUser = async (event) => {
-    const {data: {data, message}} = await axios.get("http://localhost:8080/supauser"); // 객체분해
+    const {data: {data, message}} = await axios.get(`${backUrl}/supauser`); // 객체분해
     console.log(data);
     console.log(message);
     setSupaUsers(data);
@@ -23,6 +28,7 @@ function App() {
 
   return (
       <>
+        <AirComponent></AirComponent>
         <div>
           <h1 className={'text-3xl'}>
             안녕
