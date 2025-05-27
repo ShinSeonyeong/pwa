@@ -45,6 +45,7 @@ app.get("/", (req, res, next) => {
 const ss = [];
 
 app.post("/subscribe", (req, res, next) => {
+  console.log(req.body); // 클라이언트에서 보낸 구독 정보가 req.body에 담겨있음
   ss.push({ sub: req.body });
   console.log(ss);
   res.send("구독성공");
