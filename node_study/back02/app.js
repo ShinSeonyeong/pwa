@@ -19,8 +19,8 @@ const app = express();
 // console.log(morgan().toString());
 // console.log(cors().toString());
 
-console.log(mymid.toString());
-app.use(morgan());
+// console.log(mymid.toString());
+app.use(morgan('tiny'));
 app.use(cors());
 // 해당하는 파일이 있을 때는 res.sendFile(), next()
 app.use("/", express.static(path.join(__dirname, "public")));
@@ -40,7 +40,7 @@ app.get("/", (req, res, next) => {
   res.send("Client에게 보내기");
 });
 
-app.get("/subscribe", (req, res, next) => {
+app.post("/subscribe", (req, res, next) => {
   console.log(req.body);
   res.send("구독성공");
 });
