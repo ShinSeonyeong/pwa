@@ -57,11 +57,11 @@ app.get("/send", async (req, res, next) => {
       body: "알림이 도착하였습니다. 확인해주세요.",
       icon: "https://front02-snowy.vercel.app/",
     });
-    const notification = ss.map((item) => {
+    const notifications  = ss.map((item) => {
       console.log("item=", item);
       return webpush.sendNotification(item.sub, payload);
     });
-    console.log("notifications=", notifications);
+    console.log("notifications=", notifications );
     await Promise.all(notifications);
     res.json({ message: "푸시 알람 전송 성공" });
   } catch (e) {
