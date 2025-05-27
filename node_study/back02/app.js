@@ -48,8 +48,8 @@ app.post("/subscribe", (req, res, next) => {
   console.log(req.body); // 클라이언트에서 보낸 구독 정보가 req.body에 담겨있음
   console.log(req.body.sub);
   console.log(req.body.sub.endpoint);
-  console.log(req.body.sub.keys.p256dn);
-  console.log(req.body.sub.keys.city);
+  console.log(req.body.sub.keys.p256dh);
+  console.log(req.body.city);
 
   ss.push({ sub: req.body });
   console.log(ss);
