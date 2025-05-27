@@ -9,7 +9,7 @@ webpush.setVapidDetails(
 
 const mymid = require("./myMiddle"); // 함수 반환, index.js는 생략됨
 const cors = require("cors");
-// const pool = require("./db");
+const pool = require("./db");
 const express = require("express");
 const path = require("path");
 const morgan = require("morgan");
@@ -46,6 +46,11 @@ const ss = [];
 
 app.post("/subscribe", (req, res, next) => {
   console.log(req.body); // 클라이언트에서 보낸 구독 정보가 req.body에 담겨있음
+  console.log(req.body.sub);
+  console.log(req.body.sub.endpoint);
+  console.log(req.body.sub.keys.p256dn);
+  console.log(req.body.sub.keys.city);
+
   ss.push({ sub: req.body });
   console.log(ss);
   res.send("구독성공");
@@ -58,11 +63,11 @@ app.get("/send", async (req, res, next) => {
       body: "알림이 도착하였습니다. 확인해주세요.",
       icon: "https://front02-snowy.vercel.app/",
     });
-    const notifications  = ss.map((item) => {
+    const notifications = ss.map((item) => {
       console.log("item=", item);
       return webpush.sendNotification(item.sub, payload);
     });
-    console.log("notifications=", notifications );
+    console.log("notifications=", notifications);
     await Promise.all(notifications);
     res.json({ message: "푸시 알람 전송 성공" });
   } catch (e) {

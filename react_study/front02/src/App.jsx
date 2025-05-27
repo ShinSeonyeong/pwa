@@ -33,10 +33,10 @@ function App() {
               applicationServerKey: "BMJypUqPyy71zfr0ErUBVAVce6JE1AMbZzXa45C5dKSjjmcYnrcN9gBYtJu9xmam9OmoS1wfa51tKLigNvzRsIk",
             })
             .then((subscription) => {
-              subscription.city = '대구';
               return fetch(`${API_URL}/subscribe`, {
                 method: "POST",
-                body: JSON.stringify(subscription),
+                body: JSON.stringify({sub: subscription, city: "daegu"}),// 구독 정보와 도시 정보 추가
+
                 headers: {
                   "Content-Type": "application/json",
                 },
