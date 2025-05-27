@@ -1,5 +1,5 @@
 require("dotenv").config();
-const webpush = require('web-push');
+const webpush = require("web-push");
 
 webpush.setVapidDetails(
   "mailto: sunyoeng423@naver.com",
@@ -20,7 +20,7 @@ const app = express();
 // console.log(cors().toString());
 
 // console.log(mymid.toString());
-app.use(morgan('tiny'));
+app.use(morgan("tiny"));
 app.use(cors());
 // 해당하는 파일이 있을 때는 res.sendFile(), next()
 app.use("/", express.static(path.join(__dirname, "public")));
@@ -40,9 +40,34 @@ app.get("/", (req, res, next) => {
   res.send("Client에게 보내기");
 });
 
+// 서버 시작 누르면 배열 값 삭제 새로고침
+// 배열이기에 서버 재시작하면 프론트 정보 사라짐, DB에 넣어야 함.
+const ss = [];
+
 app.post("/subscribe", (req, res, next) => {
-  console.log(req.body);
+  ss.push({ sub: req.body });
+  console.log(ss);
   res.send("구독성공");
+});
+
+app.get("/send", async (req, res, next) => {
+  try {
+    const payload = JSON.stringify({
+      title: "New 알림",
+      body: "알림이 도착하였습니다. 확인해주세요.",
+      icon: "https://front02-snowy.vercel.app/",
+    });
+    const notification = ss.map((item) => {
+      console.log("item=", item);
+      return webpush.sendNotification(item.sub, payload);
+    });
+    console.log("notifications=", notifications);
+    await Promise.all(notifications);
+    res.json({ message: "푸시 알람 전송 성공" });
+  } catch (e) {
+    console.log(e);
+    res.json({ message: "푸시 알람 전송 실패" });
+  }
 });
 
 app.listen(8080, () => {

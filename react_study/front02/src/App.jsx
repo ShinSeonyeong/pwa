@@ -33,7 +33,7 @@ function App() {
         registration.pushManager
             .subscribe({
               userVisibleOnly: true,
-              applicationServerKey: "BMJypUqPyy71zfr0ErUBVAVce6JE1AMbZzXa45C5dKSjjmcYnrcN9gBYtJu9xmam9OmoS1wfa51tKLigNvzRsIk",
+              applicationServerKey: "BMJypUqPyy71zfr0ErUBVAVce6JE1AMbZzXa45C5dKSjjmcYnrcN9gBYtJu9xmam9OmoS1wfa51tKLigNvzRsIk-VTppVG-RbhY",
             })
             .then((subscription) => {
               return fetch(`${API_URL}/subscribe`, {
