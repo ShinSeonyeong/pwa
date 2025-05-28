@@ -19,7 +19,7 @@ self.addEventListener('push', (event) => {
 
   const options = {
     body: data.body,
-      icon: '/pwa-192x192.png',
+      icon: 'icons/icon-48x48.png',
     data: {
       url: data.url // 나중에 클릭 시 이동할 경로
     }
