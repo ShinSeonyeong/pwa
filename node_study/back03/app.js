@@ -47,7 +47,31 @@ app.set("port", 3000);
 
 app.post("/login", (req, res, next) => {
   console.log(req.body);
-  res.send("login전송");
+  const { email, password } = req.body;
+  if (email === "aaa@naver.com" && password === "1234") {
+    req.session.user = { email };
+    res.send("로그인성공");
+  } else {
+    res.send("로그인실패: email, password 확인해주세요.");
+  }
+});
+
+app.get("/mypage", (req, res, next) => {
+  if (req.session.user) {
+    res.send(req.session.user);
+  } else {
+    res.send("로그인이 필요합니다.");
+  }
+});
+
+app.get("/logout", (req, res, next) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.state(500).send("세션삭제실패");
+    }
+    res.clearCookie("session-cookie");
+    res.send("로그아웃 되었습니다.");
+  });
 });
 
 app.post("/setSession", (req, res, next) => {
