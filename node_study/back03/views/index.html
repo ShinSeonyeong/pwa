@@ -6,6 +6,11 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>index.html</h1>
+    <h1>index.html {{title}}</h1>
+    <h2>{{data}}</h2>
+    <h2>{{aaa}}</h2>
+    <h2>
+      {% for person in member %} {{person.name}} {{person.age}} {%endfor%}
+    </h2>
   </body>
 </html>

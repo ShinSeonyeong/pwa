@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 
+const nunjucks = require("nunjucks");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const expressSession = require("express-session");
@@ -15,6 +16,27 @@ require("dotenv").config();
 
 const app = express();
 
+// app.use(
+//   (req, res, next) => {
+//     console.log(req.method, "그 다음 미들웨어로 진행");
+//     next();
+//   },
+//   (req, res, next) => {
+//     console.log("다음 미들웨어(1)");
+//     try {
+//       qwer; // 일부러 에러 만들었음.
+//     } catch (e) {
+//       console.log(e);
+//       next(e); // 에러 미들웨어로 진행됨.
+//     }
+//     next();
+//   },
+//   (req, res, next) => {
+//     console.log("다음 미들웨어(2)");
+//     next();
+//   }
+// );
+
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -22,8 +44,10 @@ app.use(
   })
 );
 
+// console.log(morgan("dev").toString());
+
 // 로그남기기
-app.use(morgan("combined"));
+app.use(morgan("dev"), express.json(), express.urlencoded({ extended: false }));
 // public에 있는 것 요청했을 경우 응답
 app.use("/", express.static(path.join(__dirname, "public")));
 app.use(express.json()); //req.body확인
@@ -44,6 +68,35 @@ app.use(
 );
 
 app.set("port", 3000);
+app.set("view engine", "html");
+nunjucks.configure("views", {
+  express: app,
+  watch: true,
+});
+
+app.get("/", (req, res, next) => {
+  console.log(req.body);
+  console.log(req.query);
+  console.log("/경로 요청");
+
+  // DB에 가서 새로운 데이터를 가져올 수도 있음.
+  res.locals.member = [
+    {
+      name: "홍길동",
+      age: 26,
+    },{
+      name: "최길동",
+      age: 26,
+    },{
+      name: "이길동",
+      age: 26,
+    },
+  ];
+  res.locals.data = "새로운 데이터";
+  res.locals.aaa = "aaa 새로운 데이터";
+  // res.send("성공");
+  res.render("index", { title: "제목, app.js에서 보냄" });
+});
 
 app.post("/login", (req, res, next) => {
   console.log(req.body);
@@ -114,20 +167,15 @@ app.get("/getCookie", (req, res, next) => {
   res.send("쿠키확인");
 });
 
-app.get("/", (req, res, next) => {
-  console.log(req.body);
-  console.log(req.query);
-  console.log("/경로 요청");
-  res.send("성공");
-});
-
 app.get("/html", (req, res, next) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
 // 에러처리 미들웨어
 app.use((err, req, res, next) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  console.log("에러 미들웨어 동작");
+  res.send(err.toString());
+  // res.sendFile(path.join(__dirname, "index.html"));
 });
 
 app.listen(app.get("port"), () => {
