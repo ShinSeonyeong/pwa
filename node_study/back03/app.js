@@ -8,6 +8,15 @@ const expressSession = require("express-session");
 const cors = require("cors");
 const { title } = require("process");
 const multer = require("multer");
+const fs = require("fs");
+
+try {
+  // uploads 폴더 읽어달라. 만일 없으면 error로 간다.
+  fs.readdirSync("uploads");
+} catch (e) {
+  console.error("uploads폴더가 없어서 uploads폴더 생성합니다.");
+  fs.mkdirSync("uploads"); // uploads폴더 생성 명령어
+}
 
 // const dotenv = require("dotenv");
 // dotenv.config();
@@ -60,7 +69,7 @@ const upload = multer({
       done(null, path.basename(file.originalname, ext) + Date.now() + ext);
     },
   }),
-  limits: { fileSize: 30 * 1024 * 1024 }, // 30MB까지 업로드 가능함.
+  limits: { fileSize: 100 * 1024 * 1024 }, // 30MB까지 업로드 가능함.
 });
 
 // console.log(morgan("dev").toString());
@@ -138,8 +147,18 @@ app.get("/multipart", (req, res, next) => {
   res.render("multipart");
 });
 
+// console.log(upload.single("image").toString());
+// /upload 경로 하나만 만들고 싶으면 req.file, req.files 내용을 확인해서
+// 다음 미들웨어를 upload.single()이나 upload.array()를 설정해야한다.
 app.post("/upload", upload.single("image"), (req, res, next) => {
+  console.log("파일 한개 올림");
   console.log(req.file, req.body);
+  res.send("저장성공");
+});
+
+app.post("/uploads", upload.array("many"), (req, res, next) => {
+  console.log("파일 여러개 올림");
+  console.log(req.files, req.body);
   res.send("저장성공");
 });
 
@@ -219,6 +238,8 @@ app.get("/html", (req, res, next) => {
 // 에러처리 미들웨어
 app.use((err, req, res, next) => {
   console.log("에러 미들웨어 동작");
+  console.log(err);
+  console.error(err.message);
   res.send(err.toString());
   // res.sendFile(path.join(__dirname, "index.html"));
 });
