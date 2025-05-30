@@ -6,6 +6,8 @@ const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const expressSession = require("express-session");
 const cors = require("cors");
+const { title } = require("process");
+const multer = require("multer");
 
 // const dotenv = require("dotenv");
 // dotenv.config();
@@ -44,7 +46,39 @@ app.use(
   })
 );
 
+const upload = multer({
+  storage: multer.diskStorage({
+    // 파일은 디스크에 저장하겠다는 의미
+    destination(req, file, done) {
+      done(null, "uploads/");
+    },
+    filename(req, file, done) {
+      const ext = path.extname(file.originalname);
+      console.log(ext);
+      console.log(path.basename(file.originalname, ext) + Date.now() + ext);
+      // 원래 파일명 + 현재시간 + 확장자로 설정하겠다.
+      done(null, path.basename(file.originalname, ext) + Date.now() + ext);
+    },
+  }),
+  limits: { fileSize: 30 * 1024 * 1024 }, // 30MB까지 업로드 가능함.
+});
+
 // console.log(morgan("dev").toString());
+// 미들웨어 사용하는 다른 방법
+app.use((req, res, next) => {
+  if (process.env.NODE_ENV === "production") {
+    morgan("combined")(req, res, next);
+  } else {
+    morgan("dev")(req, res, next);
+  }
+});
+
+// morgan 함수형태
+app.use((req, res, next) => {
+  (function (req, res, next) {
+    next();
+  })(req, res, next);
+});
 
 // 로그남기기
 app.use(morgan("dev"), express.json(), express.urlencoded({ extended: false }));
@@ -84,10 +118,12 @@ app.get("/", (req, res, next) => {
     {
       name: "홍길동",
       age: 26,
-    },{
+    },
+    {
       name: "최길동",
       age: 26,
-    },{
+    },
+    {
       name: "이길동",
       age: 26,
     },
@@ -96,6 +132,15 @@ app.get("/", (req, res, next) => {
   res.locals.aaa = "aaa 새로운 데이터";
   // res.send("성공");
   res.render("index", { title: "제목, app.js에서 보냄" });
+});
+
+app.get("/multipart", (req, res, next) => {
+  res.render("multipart");
+});
+
+app.post("/upload", upload.single("image"), (req, res, next) => {
+  console.log(req.file, req.body);
+  res.send("저장성공");
 });
 
 app.post("/login", (req, res, next) => {
