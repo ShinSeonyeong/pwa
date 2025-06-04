@@ -14,6 +14,8 @@ require("dotenv").config(); // .env 로딩
 
 const app = express(); // express 생성
 
+// console.log(app);
+
 /* 미들웨어 장착 시작 */
 // cors 에러 해결
 app.use(
@@ -51,14 +53,20 @@ nunjucks.configure("views", {
 
 app.use("/", indexRouter); // index 라우터 장착
 app.use("/user", userRouter); // user 라우터 장착
-app.use('/freeboard', freeboardRouter); // freeboard 라우터 장착
+app.use("/freeboard", freeboardRouter); // freeboard 라우터 장착
+
+app.use((req, res, next) => {
+  console.log("해당하는 라우터가 없다.");
+  const error = new Error("해당하는 페이지가 없습니다.");
+  next(error); // 에러 미들웨어로 가라는 의미.
+});
 
 // 에러처리 미들웨어
 app.use((err, req, res, next) => {
   console.log("에러 미들웨어 동작");
   console.log(err);
   console.error(err.message);
-  res.send(err.toString());
+  res.send(err.toString() + " <a href='/'>첫 페이지로</a>");
 });
 
 app.listen(app.get("port"), () => {

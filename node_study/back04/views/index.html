@@ -1,18 +1,21 @@
+{% set aa="aa입니다" %} {% set bb="bb입니다" %} {% set fruits=['사과',
+'배','수박', '참외'] %} {% set test = true %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.9.0/axios.min.js"
-      integrity="sha512-FPlUpimug7gt7Hn7swE8N2pHw/+oQMq/+R/hH/2hZ43VOQ+Kjh25rQzuLyPz7aUWKlRpI7wXbY6+U3oFPGjPOA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-  </head>
+  {% include 'header.html' %}
   <body>
+    {% if test %}
+    <h4>테스트 값은 참입니다</h4>
+    {% endif %}
+    <h1>aa - {{aa}} bb - {{bb}}</h1>
+    <h1>span사용 - {{'<span>aa</span>'}} bb - {{'<span>bb</span>' | safe}}</h1>
     <h1>index - {{title}}</h1>
+    <h1>myname - {{myname}}</h1>
+    {% for item in fruits %}
+    <h3>{{loop.index}}.{{item}}</h3>
+    {% endfor %} {% for users in users %}
+    <h3>{{loop.index}}.{{users.name}}, {{users.age}}</h3>
+    {% endfor %}
     <div>
       <h1>파일 한 개 올리기</h1>
       <!-- <form action="/upload" method="post" enctype="multipart/form-data"> -->
