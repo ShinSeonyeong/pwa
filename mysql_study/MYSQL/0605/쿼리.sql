@@ -1,0 +1,10 @@
+CREATE table nodejs.users (
+   id INT NOT NULL AUTO_INCREMENT,
+   `NAME` VARCHAR(20) NOT NULL,
+   age INT UNSIGNED NOT NULL,
+   married TINYINT NOT NULL,
+   COMMENT TEXT NULL,
+   created_at DATETIME NOT NULL DEFAULT NOW(),
+   PRIMARY KEY(id),
+   UNIQUE INDEX name_unique (`NAME` ASC))
+COMMENT = '사용자정보' ENGINE=INNODB;users
