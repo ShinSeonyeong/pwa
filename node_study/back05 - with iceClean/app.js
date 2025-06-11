@@ -40,6 +40,7 @@ sequelize
 
 // User.create({ name: "qwer", age: 20, married: 0, comment: "안녕하세요" });
 
+app.use(cors()); // CORS 미들웨어 장착
 app.use(morgan("dev"));
 app.use(express.json(), express.urlencoded({ extended: false }));
 app.use("/", express.static(path.join(__dirname, "public")));
@@ -62,8 +63,6 @@ nunjucks.configure("views", {
   express: app,
   watch: true,
 });
-app.use(cors()); // CORS 미들웨어 장착
-
 /* 미들웨어 장착 끝 */
 
 // 우리가 만든폴더면 ./ 넣어주고, routes 폴더에 있는 파일을 불러온다.
