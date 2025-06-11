@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>기사</h1>
+    {% for item in data %}
+    <li>고객명 {{item.name}}</li>
+    <li>고객 전화번호 {{item.tel}}</li>
+    <li>고객 이메일 {{item.email}}</li>
+    <li>고객 주소 {{item.addr}}</li>
+    {% endfor %}
+  </body>
+</html>
