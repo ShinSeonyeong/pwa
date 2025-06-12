@@ -58,11 +58,6 @@ app.use(
   })
 );
 app.set("port", 3000);
-app.set("view engine", "html");
-nunjucks.configure("views", {
-  express: app,
-  watch: true,
-});
 /* 미들웨어 장착 끝 */
 
 // 우리가 만든폴더면 ./ 넣어주고, routes 폴더에 있는 파일을 불러온다.
