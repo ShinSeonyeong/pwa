@@ -38,12 +38,19 @@ router.post('/login', async (req, res) => {
   res.json(sendData);
 })
 
-router.get('me', async (req, res) => {
+router.get('/me', async (req, res) => {
   if (req.session.user) {
-    res.json({status: false, user: req.session.user});
+    res.json({status: true, user: req.session.user});
   } else {
     res.json({status: false});
   }
+})
+
+router.post('/logout', async (req, res) => {
+  req.session.destroy(() => {
+    res.clearCookie('connect.sid'); // 세션 쿠키 삭제
+    res.json({success: true})
+  });
 })
 
 module.exports = router;

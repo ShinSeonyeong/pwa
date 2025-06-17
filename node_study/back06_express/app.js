@@ -43,6 +43,12 @@ nunjucks.configure("views", {
   watch: true,
 });
 
+app.use((req,res,next)=> {
+  console.log('여기오는지 확인');
+  res.locals.user = req.session.user; // 세션에 저장된 사용자 정보를 로컬 변수로 설정
+  next();
+})
+
 app.use('/', indexRouter);
 app.use('/admin', adminRouter);
 app.use('/reservation', resRouter);
