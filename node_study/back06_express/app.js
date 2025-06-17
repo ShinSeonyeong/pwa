@@ -14,10 +14,11 @@ var resRouter = require('./routes/reservation');
 var payRouter = require('./routes/pay');
 var cleanerRouter = require('./routes/cleaner');
 var loginRouter = require('./routes/login');
+var backApiRouter = require('./routes/backApi/admin');
 
 var app = express();
 
-app.use(cors());
+app.use(cors({ origin: 'http://localhost:5175', credentials: true }));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
@@ -48,5 +49,6 @@ app.use('/reservation', resRouter);
 app.use('/pay', payRouter);
 app.use('/cleaner', cleanerRouter);
 app.use('/login', loginRouter);
+app.use('/back', backApiRouter);
 
 module.exports = app;
