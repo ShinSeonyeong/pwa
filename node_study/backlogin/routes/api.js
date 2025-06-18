@@ -4,6 +4,10 @@ const supabase = require('../database/db');
 const bycrypt = require('bcrypt');
 const {AuthWeakPasswordError} = require("@supabase/supabase-js");
 
+const client_id = process.env.KAKAO_CLIENT_ID;
+const redirect_url = process.env.KAKAO_REDIRECT_URL;
+const client_secret = process.env.KAKAO_CLIENT_SECRET;
+
 router.post('/login', async (req, res) => {
   const {id, pw} = req.body;
   const sendData = {};
@@ -34,8 +38,6 @@ router.post('/login', async (req, res) => {
     sendData.message = '아이디와 비밀번호를 확인해주세요.';
     res.status(401).json(sendData);
   }
-
-  res.json(sendData);
 })
 
 router.get('/me', async (req, res) => {
@@ -51,6 +53,10 @@ router.post('/logout', async (req, res) => {
     res.clearCookie('connect.sid'); // 세션 쿠키 삭제
     res.json({success: true})
   });
+})
+
+router.get('/kakaologin', (req, res) => {
+  res.redirect(`https://kauth.kakao.com/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_url}&response_type=code`);
 })
 
 module.exports = router;
