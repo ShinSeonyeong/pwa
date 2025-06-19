@@ -120,7 +120,7 @@ router.post('/complete', async (req, res) => {
           cleaner_id: req.session.user.id, // 기사 id
           res_no: res_no, // 예약번호
           memo: memo, // 메모
-          images: uploadedFilePaths, // public image 주소
+          photo: uploadedFilePaths.join(','), // public image 주소, 배열을 문자열로 변경하는 작업
           delivered_at: new Date().toISOString(),
           clean_status: '완료'
         }])
