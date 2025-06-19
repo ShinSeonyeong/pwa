@@ -21,7 +21,8 @@ router.post('/', async function (req, res, next) {
   const {data, error} = await supabase.from('cleaner')
       .select('*')
       .eq('phone', phone)
-      .single();
+      .single()
+  ;
 
   // console.log('data = ')
   // console.log(data);

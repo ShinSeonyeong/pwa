@@ -5,9 +5,17 @@ const supabase = require('../utils/supa');
 // 새로고침 하면 reservation 페이지 호출
 router.get('/', async function (req, res, next) {
   console.log('주소 호출');
-  const {data, error} = await supabase.from('ice_res').select('*');
-  console.log(data);
-  res.render('reservation', {data});
+  const {data: payData} = await supabase
+      .from('ice_res')
+      .select()
+      .in('status', ['결제대기', '결제완료']);
+  const {data: cleanData} = await supabase
+      .from('ice_res')
+      .select()
+      .in('status', ['청소대기', '청소진행', '청소완료']);
+
+
+  res.render('reservation', {payData, cleanData});
 })
 
 router.post('/', async function (req, res, next) {
@@ -19,7 +27,7 @@ router.post('/', async function (req, res, next) {
     tel,
     email,
     addr,
-    date:new Date(date),
+    date: new Date(date),
     time,
     model,
     capacity,

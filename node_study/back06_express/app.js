@@ -20,8 +20,8 @@ var app = express();
 
 app.use(cors({ origin: 'http://localhost:5175', credentials: true }));
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb', extended: false}));
 app.use(cookieParser());
 app.use(expressSession({
   secret: 'a0123456789',
@@ -44,7 +44,6 @@ nunjucks.configure("views", {
 });
 
 app.use((req,res,next)=> {
-  console.log('여기오는지 확인');
   res.locals.user = req.session.user; // 세션에 저장된 사용자 정보를 로컬 변수로 설정
   next();
 })
