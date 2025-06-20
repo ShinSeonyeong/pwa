@@ -6,7 +6,6 @@ const router = express.Router();
 router.get('logout', (req, res) => {
   req.session.destory(() => {
     console.log('로그아웃 되엇습니다.');
-    ;
     res.clearCookie('session-cookie');
     res.redirect('/')
   })
@@ -16,13 +15,38 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', async function (req, res, next) {
-  const {phone, password} = req.body;
+  console.log('req.body', req.body);
+  const {phone, password, endpoint, p256dh, auth} = req.body;
+  console.log('endpoint', endpoint);
+  console.log('p256dh', p256dh);
+  console.log('auth', auth);
 
   const {data, error} = await supabase.from('cleaner')
       .select('*')
       .eq('phone', phone)
       .single()
   ;
+
+  // 로그인 성공 시 푸시 구독 정보 저장
+  if (endpoint && p256dh && auth) {
+    const {error: upsertError} = await supabase
+        .from('push_subscribe')
+        .upsert([
+          {
+            phone,
+            endpoint,
+            p256dh,
+            auth,
+            updated_at: new Date()
+          }
+        ], {onConflict: ['phone']});
+
+    if (upsertError) {
+      console.error('푸시 구독 정보 저장 실패:', upsertError);
+    } else {
+      console.log('푸시 구독 정보 저장 성공 - phone:', phone);
+    }
+  }
 
   // console.log('data = ')
   // console.log(data);

@@ -3,6 +3,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var expressSession = require('express-session');
 var logger = require('morgan');
+var webpush = require('web-push');
+
+webpush.setVapidDetails(
+    'https://port-0-pwamaster-manaeiwh8fe5b082.sel4.cloudtype.app/', // cloudType 배포된 주소
+    'BCLqkY-h2mN70TTB7611ZFJ_WhtoENg2GnO7Mit-hd4GbzTnclbB-yFpVfSPaLSDUVqiP8_B8ah5YlH3Ri9FXJ4',
+    'wqYaS18G1c9wMlh3ehMV-oEvbwcB9H8TY2gvQeSxM6s'
+)
 
 require("dotenv").config();
 const cors = require("cors");
