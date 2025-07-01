@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\pwa\\cs_study\\chap0630\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{16D39609-7DEB-4A62-AD53-E6EA062F85B8}|winform\\winform.csproj|e:\\pwa\\cs_study\\chap0630\\winform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16D39609-7DEB-4A62-AD53-E6EA062F85B8}|winform\\winform.csproj|solutionrelative:winform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16D39609-7DEB-4A62-AD53-E6EA062F85B8}|winform\\winform.csproj|e:\\pwa\\cs_study\\chap0630\\winform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{16D39609-7DEB-4A62-AD53-E6EA062F85B8}|winform\\winform.csproj|solutionrelative:winform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "E:\\pwa\\cs_study\\chap0630\\winform\\Form1.cs",
+              "RelativeDocumentMoniker": "winform\\Form1.cs",
+              "ToolTip": "E:\\pwa\\cs_study\\chap0630\\winform\\Form1.cs",
+              "RelativeToolTip": "winform\\Form1.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAYwFYAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T02:46:44.994Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs [\uB514\uC790\uC778]",
+              "DocumentMoniker": "E:\\pwa\\cs_study\\chap0630\\winform\\Form1.cs",
+              "RelativeDocumentMoniker": "winform\\Form1.cs",
+              "ToolTip": "E:\\pwa\\cs_study\\chap0630\\winform\\Form1.cs [\uB514\uC790\uC778]",
+              "RelativeToolTip": "winform\\Form1.cs [\uB514\uC790\uC778]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T02:36:58.639Z",
+              "EditorCaption": " [\uB514\uC790\uC778]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
