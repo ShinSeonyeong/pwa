@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "create-expo-app": "^3.4.2"
+  },
+  "devDependencies": {
+    "@react-native-community/cli": "latest"
   }
 }
