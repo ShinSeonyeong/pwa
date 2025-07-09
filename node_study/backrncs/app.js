@@ -8,3 +8,11 @@ require("dotenv").config();  // .env
 const cors = require('cors');
 
 var indexRouter = require('./routes/index');
+
+const app = express();
+
+app.use("/", indexRouter);
+
+app.listen(3000, ()=>{
+  console.log("server is running on port 3000");
+})
