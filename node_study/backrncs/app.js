@@ -4,19 +4,8 @@ var cookieParser = require('cookie-parser');
 var expressSession = require('express-session');
 var logger = require('morgan');
 
-require("dotenv").config();  // .env
-
-const mongo = require("./schemas");
-mongo();
-
-require("./schemas")
-
-const cors = require('cors');
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
 const app = express();
+const cors = require('cors');
 
 app.use(cors(
     // {
@@ -24,6 +13,7 @@ app.use(cors(
     //   credentials: true, // 쿠키값 허용 하겠다
     // }
 ))
+
 app.use(logger('dev'));
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb', extended: false}));
@@ -40,6 +30,14 @@ app.use(expressSession({
 }))
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+require("dotenv").config();  // .env
+
+const mongo = require("./schemas");
+mongo();
+
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
