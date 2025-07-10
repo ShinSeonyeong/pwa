@@ -22,6 +22,23 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.put('/:id', async (req, res, next) => {
+  try {
+    const {id} = req.params;
+    const {nickname, email, password} = req.body;
+    const updated = await User.findByIdAndUpdate(id,
+        {nickname, email, password},
+        {new: true, runValidators: true}
+    );
+    if (!updated) {
+      return res.status(404).json({message: '사용자를 찾을 수 없습니다.'})
+    }
+    return res.json(updated);
+  } catch (e) {
+    return res.status(500).json(e);
+  }
+})
+
 router.delete('/:id', async (req, res, next) => {
   try {
     const {id} = req.params;
@@ -31,7 +48,6 @@ router.delete('/:id', async (req, res, next) => {
   } catch (e) {
     return res.status(500).json(e);
   }
-
-})
+});
 
 module.exports = router;
