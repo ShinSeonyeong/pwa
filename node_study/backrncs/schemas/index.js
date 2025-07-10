@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-require("dotenv").config(); // process.env env에 설정한 내용을 가져옴
+// require("dotenv").config(); // process.env env에 설정한 내용을 가져옴 (app.js에서 이미 실행됨, 중복)
 
 const mongo_url = process.env.MONGO_URL;
 
