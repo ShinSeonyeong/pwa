@@ -38,9 +38,11 @@ mongo();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var authRouter = require('./routes/auth');
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/auth", authRouter);
 
 app.listen(3000, () => {
   console.log("server is running on port 3000");
