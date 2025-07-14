@@ -34,7 +34,7 @@ router.post('/login', async (req, res) => {
           nickName: user.nickname,
         },
         "secret",
-        {expiresIn: "1h"} 
+        {expiresIn: "1h"}
     )
     res.json({token});
   } catch (err) {
