@@ -1,0 +1,30 @@
+# 빌드 출력물
+bin/
+obj/
+
+# 사용자별 VS 설정
+.vs/
+*.user
+*.suo
+*.wsuo
+
+# 패키지 관련 (필요시)
+packages/
+*.nupkg
+*.p7s
+
+# 리샘플링 및 임시 파일
+*.db
+*.db-shm
+*.db-wal
+*.vsidx
+*.cache
+*.log
+*.tmp
+*.bak
+
+# 기타
+*.exe
+*.pdb
+*.config
+*.csproj.FileListAbsolute.txt
